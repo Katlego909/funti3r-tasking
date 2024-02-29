@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+
+    <div class="main-container">
+        <div id="search-app">
+            <h1 class="title">Search</h1>
+
+            <form v-on:submit.prevent="performSearch()">
+                <div class="columns">
+                    <div class="field">
+                        <input type="text" name="query" id="id_query" class="input" v-model="query">
+                        <button type="submit">Search</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock  %}
+
+{% block scripts %}
+<script>
+    const SearchApp = {
+        data() {
+            return {
+                query: '""',
+                tasks: []
+            }
+        },
+        delimiters: ['[[', ']]'],
+        methods: {
+            performSearch() {
+                var data = {
+                    'query': this.query,
+                }
+
+                fetch('/tasks/api/search', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then((response) => {
+                    return response.json()
+                })
+                .then((result) => {
+                    console.log(result.tasks)
+                    this.tasks = result.tasks
+                })
+                .catch((error) => {
+                    console.log('Error', error)
+                })
+            }
+        }
+    }
+
+    Vue.createApp(SearchApp).mount('#search-app')
+</script>
+{% endblock %}

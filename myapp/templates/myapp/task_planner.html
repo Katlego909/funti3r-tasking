@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kanban Board</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    .board {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+    }
+    .column {
+        background-color: #f4f4f4;
+        min-width: 250px;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    .column h3 {
+        margin-top: 0;
+    }
+    .card {
+        background-color: #fff;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        cursor: grab;
+    }
+</style>
+</head>
+<body>
+
+<div class="board">
+    <div class="column" id="todoColumn" ondrop="drop(event, 'todo')" ondragover="allowDrop(event)">
+        <h3>To Do</h3>
+    </div>
+    <div class="column" id="inProgressColumn" ondrop="drop(event, 'inProgress')" ondragover="allowDrop(event)">
+        <h3>In Progress</h3>
+    </div>
+    <div class="column" id="doneColumn" ondrop="drop(event, 'done')" ondragover="allowDrop(event)">
+        <h3>Done</h3>
+    </div>
+</div>
+
+<div>
+    <input type="text" id="newItemContent" placeholder="Enter a new item">
+    <button onclick="addItem()">Add Item</button>
+</div>
+
+<script>
+    // Initialize items in columns
+    const todoColumn = document.getElementById('todoColumn');
+    const inProgressColumn = document.getElementById('inProgressColumn');
+    const doneColumn = document.getElementById('doneColumn');
+    const items = [
+        { id: 1, content: 'Task 1' },
+        { id: 2, content: 'Task 2' },
+        { id: 3, content: 'Task 3' }
+    ];
+    items.forEach(item => {
+        const card = createCard(item);
+        todoColumn.appendChild(card);
+    });
+
+    // Function to create a card
+    function createCard(item) {
+        const card = document.createElement('div');
+        card.classList.add('card');
+        card.draggable = true;
+        card.dataset.id = item.id;
+        card.textContent = item.content;
+        card.addEventListener('dragstart', dragStart);
+        card.addEventListener('dragover', dragOver);
+        card.addEventListener('drop', dragDrop);
+        return card;
+    }
+
+    // Drag start event handler
+    function dragStart(event) {
+        event.dataTransfer.setData('text/plain', event.target.dataset.id);
+    }
+
+    // Drag over event handler
+    function dragOver(event) {
+        event.preventDefault();
+    }
+
+    // Drag drop event handler
+    function dragDrop(event) {
+        event.preventDefault();
+        const itemId = event.dataTransfer.getData('text/plain');
+        const item = document.querySelector(`.card[data-id="${itemId}"]`);
+        if (item) {
+            const targetColumnId = event.target.parentElement.id;
+            const target = document.getElementById(targetColumnId);
+            target.appendChild(item);
+        }
+    }
+
+    // Add new item
+    function addItem() {
+        const newItemContent = document.getElementById('newItemContent').value.trim();
+        if (newItemContent !== '') {
+            const newItem = { id: Date.now(), content: newItemContent };
+            const card = createCard(newItem);
+            todoColumn.appendChild(card);
+            document.getElementById('newItemContent').value = '';
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+{% block title %}Add Task{% endblock title %}
+{% block content %}
+
+<style>
+
+    .main-title {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    
+    .title {
+        font-size: 22px;
+        margin-bottom: 10px;
+        color: purple;
+    }
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    form {
+        width: 500px;
+    }
+
+    .subtitle {
+        font-size: 12px;
+        color: #9C9C9C;
+        margin-bottom: 10px;
+    }
+
+    .description {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .more {
+        font-size: 14px;
+        color: gray;
+        cursor: pointer;
+        transition: all .2s ease;
+    }
+
+    .more:hover {
+        color: purple;
+    }
+
+    input, 
+    textarea {
+        padding: 10px 5px;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    select {
+        width: 50%;
+        padding: 10px 10px;
+    }
+
+
+    button {
+        width: 100%;
+        font-weight: 700;
+        border: none;
+        border-radius: 5px;
+        background: purple;
+        color: #fff;
+        padding: 15px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: purple;
+        color: #ccc;
+    }
+
+</style>
+
+<div class="main-container">
+
+    <h1 class="main-title">Add New Task</h1>
+
+    <div class="container">
+        <form method="POST" action=".">
+            {% csrf_token %}
+            
+            {% if form.errors %}
+                {% for error in form.errors %}
+                    <div class="notification">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+    
+            {{form.as_p}}
+    
+    
+
+        {% comment %} <div class="field">
+            <label>Title</label>
+            <input class="input" type="text" name="title" id="id_title">
+        </div>
+
+        <div class="field">
+            <label>Short Description</label>
+            <textarea class="textarea" name="short_description" id="id_short_description"></textarea>
+        </div>
+
+        <div class="field">
+            <label>Long Description</label>
+            <textarea class="textarea" name="long_description" id="id_long_description"></textarea>
+        </div>
+
+        <div class="field">
+            <label>Company Name</label>
+            <input class="input" type="text" name="company_name" id="id_company_name">
+        </div>
+
+        <div class="field">
+            <label>Company Address</label>
+            <input class="input" type="text" name="company_address" id="id_company_address">
+        </div>
+
+        <div class="field">
+            <label>Company Zip Code</label>
+            <input class="input" type="text" name="company_zipcode" id="id_company_zipcode">
+        </div>
+
+        <div class="field">
+            <label>Company Location</label>
+            <input class="input" type="text" name="company_location" id="id_company_location">
+        </div>
+
+        <div class="field">
+            <label>Company Country</label>
+            <input class="input" type="text" name="company_country" id="id_company_country">
+        </div>
+
+        <div class="field">
+            <label>Company Size</label>
+            <select name="company_size">
+                <option value="">Choose Size</option>
+                <option value="size_1_9">1-9</option>
+                <option value="size_10_49">10-49</option>
+                <option value="size_50_99">50-99</option>
+                <option value="size_100">100+</option>
+            </select>
+        </div> {% endcomment %}
+
+        <button type="submit">Add Task</button>
+    </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+{% block title %}Apply{% endblock title %}
+{% block content %}
+
+<style>
+    
+    .main-title {
+        margin-bottom: 40px;
+    }
+
+    .task-desc {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+        background: #fff;
+        border: solid 0.5px #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        margin-bottom: 40px;
+    }
+
+    .task-desc h3 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    .task-info-long {
+        color: gray;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.5;
+        margin-bottom: 15px;
+    }
+
+    form {
+        display: block;
+        margin: 0 auto;
+    }
+
+    input, 
+    textarea {
+        background: #fff;
+        padding: 10px 5px;
+        width: 100%;
+        margin-bottom: 10px;
+        border: solid 1px #ccc;
+        border-radius: 5px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .btn-submit {
+        font-weight: 700;
+        border: none;
+        border-radius: 5px;
+        background: purple;
+        color: #fff;
+        padding: 15px 40px;
+        margin-top: 15px;
+        cursor: pointer;
+    }
+
+    .btn-submit:hover {
+        background: purple;
+        color: #ccc;
+    }
+
+    .task-cat {
+        border: solid 1px #ccc;
+        border-radius: 5px;
+        padding: 20px;
+        overflow: hidden;
+    }
+
+    .task-icon {
+        font-size: 14px;
+        margin-right: 10px;
+    }
+    
+    .task-cat-name {
+        color: blue;
+        background: lightblue;
+        padding: 10px 15px;
+        margin-bottom: 20px;
+        border: none;
+        border-radius: 20px;
+    }
+
+    .task-cat-amount, 
+    .task-cat-experience {
+        margin-top: 20px;
+    }
+
+    .task-image {
+        width: 100%;
+        height: 100%;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 5px;
+    }
+
+    .skill-title {
+        padding-top: 20px;
+        margin: 15px 0;
+        border-top: solid 0.5px #ccc;
+    }
+
+    .task-skills {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .task-skill {
+        background: lightblue;
+        color: blue;
+        font-size: 12px;
+        border: solid 0.2px #fff;
+        border-radius: 20px;
+        padding: 5px 10px;
+    }
+
+</style>
+
+ <div class="main-container">
+
+    {% for msg in messages %}
+        {{ msg }}
+    {% endfor %}
+
+    <h1 class="main-title">
+        Submit Application for {{ task.title }}
+    </h1>
+
+    <div class="task-desc">
+
+        <!-- <div class="task-img">
+            <img src="{{ task.image.url }}" class="task-image" alt="Task Image">
+        </div> -->
+
+        <div class="task-info">
+            <a href="">
+                <button class="task-cat-name">{{ task.category }}</button>
+            </a>
+            <h3 class="task-info-short">{{ task.short_description }}</h3>
+            <p class="task-info-long">{{ task.long_description|truncatewords:55 }}</p>
+        </div>
+
+        <div class="task-cat">
+            <p class="task-cat-company"><i class="fa fa-building task-icon"></i> {{ task.company_name }}</p>
+            <p class="task-cat-amount"><i class="fa fa-dollar task-icon"></i> R{{ task.amount }}</p>
+            <p class="task-cat-experience"><i class="fa fa-briefcase task-icon"></i>{{ task.experience }} level</p>
+            <p class="task-cat-experience"><i class="fa fa-clock task-icon"></i>{{ task.countdown_duration }} </p>
+
+            <h4 class="skill-title">Skills Required</h4>
+
+            <div class="task-skills">
+
+                {% for skill in task.skills.all %}
+                <button class="task-skill">
+                    {{ skill.name }}
+                </button>
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %} -->
+
+    <form method="POST" action="." enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <button type="submit" class="btn-submit">Apply</button>
+    </form>
+ </div>
+{% endblock %}

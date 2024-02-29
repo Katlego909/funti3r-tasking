@@ -1,0 +1,311 @@
+{% extends "myapp/nav-footer.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+
+    .price {
+        position: absolute;
+        font-size: 12px;
+        font-weight: 400;
+        color: green;
+        background: lightgreen;
+        padding: 5px 10px;
+        margin: 20px;
+        border-radius: 20px;
+    }
+
+    .trusted-by {
+        margin-bottom: 15px;
+    }
+
+    .card-footer {
+        border-top: solid .5px #ccc;
+        padding-top: 20px;
+    }
+
+</style>
+
+<div class="main">
+
+    <!-- Hero -->
+
+    <div class="hero" id="hero-section">
+        <div class="hero-section">
+            <h5 class="hero-subtitle">Explore Micro-tasking</h5>
+            <h1 class="hero-section-title">
+                Maximize Efficiency, Empower Teams.
+            </h1>
+                <p class="hero-text">Our innovative micro-tasking application is designed to unlock unprecedented efficiency.
+                </p>
+
+                <!-- Search bar -->
+
+                <div class="search-bar">
+                    <form method="get" action="{% url 'home' %}">
+                        <input type="text" name="search" id="search" placeholder="Search for tasks...">
+                        <button type="submit" value="Filter"class="btn-filter"><i class="fa fa-search"></i></button>
+                    </form>
+                </div>
+
+                <!-- Categories -->
+
+                <div class="hero-categories">
+                    <p class="category-title">Popular categories: </p>
+                    <div class="categories">
+                            {% for category in categories %}
+                            <a href="{% url 'category_tasks' category.id %}">
+                                <button class="btn-category">
+                                    <i class="fa fa-search"></i> {{ category.name }}
+                                </button>
+                            </a>
+                            {% endfor %}
+                    </div>
+                </div>
+        </div>
+
+        <!-- Hero Image -->
+
+        <div class="hero-section">
+            <img src="{% static 'assets/images/hero-img.jpg' %}" class="hero-img">
+        </div>
+
+        <!-- End Hero Image -->
+
+    </div>
+
+    <!-- End Hero -->
+</div>
+
+ <!-- Content -->
+
+ <div class="companies">
+    <div class="container">
+        <h4 class="trusted-by">Trusted by </h4>
+        <div class="company">
+                <img src="{% static 'assets/images/ayoba_logo.png' %}" class="company-img">
+                <img src="{% static 'assets/images/suncash.png' %}" class="company-img">
+                <img src="{% static 'assets/images/fonbnk.svg' %}" class="company-img">
+        </div>
+    </div>
+ </div>
+
+ <section class="category">
+     <div class="container">
+        <h1 class="section-heading">Top Tasks</h1>
+        <div class="popular-tasks">
+
+            <div class="card-grid">
+                {% for task in tasks %}
+                   <div class="card-item">
+                    {% if task.image %}
+                    <div class="price">
+                       R{{ task.amount }}
+                    </div>
+                    <img src="{{ task.image.url }}" class="image" alt="Task Image">
+                    {% endif %}
+                                <div class="card-body">
+                                    <div class="info">
+                                        <h2 class="card-title">{{ task.title }}</h2>
+                                        <h2 class="card-amount">{{ task.category }}</h2>
+                                    </div>
+                                    <p class="card-description"> {{ task.short_description|truncatewords:8 }} </p>      
+                                    
+                                    <!-- {% if user.is_authenticated %}
+                                        <form action="{% url 'toggle_favorite' task.id %}" method="post">
+                                            {% csrf_token %}
+                                            <input type="submit" class="favorite" value="{% if task in user.favorite_tasks.all %} Remove from Favorites{% else %} Add to Favorites {% endif %}">
+                                        </form>
+                                    {% else %}
+                                        <p>Login to add to Favorites.</p>
+                                    {% endif %}  -->
+        
+                                </div>
+        
+                                <div class="card-footer">
+                                    {% if request.user == task.created_by %}
+                                        <a href="{% url 'edit_task' task.id %}" class="edit">Edit</a>
+                                        <a href="{% url 'delete_task' task.id %}" class="delete">Delete</a>
+                                    {% else %}
+                                        <a href="{% url 'task_detail' task.id %}" class="view-more">View More</a>
+                                    {% endif %}
+            
+                                    <div class="company-name"> 
+                                        {% if task.company_logo %}
+                                        <img src="{{ task.company_logo.url }}" class="company_logo">
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                {% empty %}
+                <p class="task-notification">Task not found! Search again.</p>
+                {% endfor %}
+                </div>
+             {% comment %} End Tasks {% endcomment %}
+        </div>
+        </div>
+    </div>
+ </section>
+
+ <section id="how-it-works">
+     <div class="container">
+         <div class="section-header">
+             <h1 class="section-heading">How it works</h1>
+         </div>
+         <div class="process-grid">
+            <a href="{% url 'login' %}">
+                
+            <div class="process-card">
+                <div class="process-card-info">
+                    <div class="card-info-heading">
+                        <i class="fa fa-user"></i>
+                        <h3>Step 1</h3>
+                        <h1>Sign Up</h1>
+                        <p>Register seamlessly using either your email or preferred social media accounts.</p>
+                    </div>
+                </div>
+            </div>
+            </a>
+
+            <div class="process-card">
+                <div class="process-card-info">
+                    <div class="card-info-heading">
+                        <i class="fa fa-check"></i>
+                        <h3>Step 2</h3>
+                        <h1>Complete Task</h1>
+                        <p>Choose and successfully execute tasks that align with your expertise and interests.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="process-card">
+                <div class="process-card-info">
+                    <div class="card-info-heading">
+                        <i class="fa fa-hand-holding-dollar"></i>
+                        <h3>Step 3</h3>
+                        <h1>Get Paid</h1>
+                        <p>Experience prompt compensation immediately upon task completion.</p>
+                    </div>
+                </div>
+            </div>
+
+    
+         </div>
+
+     </div>
+ </section>
+
+ <section id="category-tabs">
+     <div class="container">
+        <div class="section-header">
+            <h1 class="section-heading">Browse by Category</h1>
+            <a href="{% url 'categories' %}" class="see-all">See All <i class="fa fa-chevron-right"></i></a>
+        </div>
+
+        <div class="categories-grid">
+        {% for category in categories %}
+        <a href="{% url 'category_tasks' category.id %}">
+            <div class="category-item">
+                <div class="category-img">
+                    {% if category.icon %}
+                        <img src="{{ category.icon.url }}" class="category-icon" alt="{{ category.name }} Icon">
+                    {% endif %}
+                </div>
+                <div class="category-info">
+                    <h3>{{ category.name }}</h3>
+                    <p>{{ category.tasks.count }} items</p>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+        </div>
+    </div>
+ </section>
+
+ <section class="cta">
+    <div class="container">
+        <div class="call-to-action">
+            <h1>Transform your productivity today!</h1>
+            <p>Whether you're a freelancer looking for exciting opportunities or a business seeking efficient solutions, Funti3r Micro-tasking is your gateway to seamless collaboration and unparalleled results.</p>
+            <a href="{% url 'signup' %}">
+                <button class="btn-cta">Get Started</button>
+            </a>
+        </div>
+    </div>
+ </section>
+
+ <section class="enterprise-cta">
+    <div class="container">
+        <div class="enterprise-details">
+            <div class="enterprise-info">
+                <h3 class="enterprise-subtitle">Enterprise Package</h3>
+                <h1>Unearthing exceptional partnerships</h1>
+                <p>Tap into the our elite agent pool, coupled with a comprehensive set of tools for managing a dynamic hybrid workforce. This is the contemporary blueprint for driving innovation</p>
+                <ul class="enterprise-items">
+                    <li class="enterprise-item"><i class="fa fa-check"></i> Unlock specialized talent to address your skill gaps.</li>
+                    <li class="enterprise-item"><i class="fa fa-check"></i> Manage every aspect of your talent engagement.</li>
+                    <li class="enterprise-item"><i class="fa fa-check"></i> Forge a partnership with Funti3r for seamless end-to-end support.</li>
+                </ul>
+                <a href="mailto:sales@funti3r.xyz">
+                    <button class="btn-cta">Talk to Us <i class="fa fa-chevron-right"></i></button>
+                </a>
+            </div>
+            <div class="enterprise-img">
+                <img src="{% static 'assets/images/enterprise.jpg' %}" class="hero-img">
+            </div>
+        </div>
+    </div>
+ </section>
+
+ <section class="process-cta">
+    <div class="container">
+        <div class="process-details">
+            <div class="process-img">
+                <img src="{% static 'assets/images/project.jpg' %}" class="hero-img">
+            </div>
+            <div class="process-info">
+                <h3 class="process-subtitle">The Process</h3>
+                <h1>With us you'll always find the right people for the Job</h1>
+                <p>Work with a network of independent professionals and get things done—from quick turnarounds to big projects.</p>
+                <ul class="process-items">
+                    <li class="process-item"><i class="fa fa-check"></i> No cost to join</li>
+                    <br><hr><br>
+                    <li class="process-item"><i class="fa fa-check"></i> Post a job and hire top talent</li>
+                    <br><hr><br>
+                    <li class="process-item"><i class="fa fa-check"></i> Work with the best—without full-time hiring</li>
+                </ul>
+                <!-- <a href="">
+                    <button class="btn-cta">Get in Touch <i class="fa fa-chevron-right"></i></button>
+                </a> -->
+            </div>
+        </div>
+    </div>
+ </section>
+
+ <section class="academy-cta">
+    <div class="container">
+        <div class="academy">
+            <div class="academy-info">
+                <h1>Funti3r Academy</h1>
+                <p>Embark on your micro-tasking journey with Funti3r Micro-tasking Academy. Enroll in our courses and unlock a world of opportunities in the rapidly growing field of micro-tasking.</p>
+                <ul class="academy-items">
+                    <li class="academy-item"><i class="fa fa-check"></i> Engage in hands-on, interactive learning experiences.</li>
+                    <br><hr><br>
+                    <li class="academy-item"><i class="fa fa-check"></i> Learn at your own pace, on your own terms.</li>
+                    <br><hr><br>
+                    <li class="academy-item"><i class="fa fa-check"></i> Engage in hands-on, interactive learning experiences. </li>
+                </ul>
+                <a href="{% url 'course_list' %}">
+                    <button class="btn-academy">Start Learning <i class="fa fa-chevron-right"></i></button>
+                </a>
+            </div>
+            <div class="academy-img">
+                <img src="{% static 'assets/images/academy.jpg' %}" class="academy-img">
+            </div>
+        </div>
+    </div>
+ </section>
+
+ 
+
+{% endblock %}

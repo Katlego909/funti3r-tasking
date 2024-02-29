@@ -1,0 +1,410 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Task Details{% endblock title %}
+{% block content %}
+
+<style>
+
+    .task-title {
+        font-size: 40px;
+        margin-bottom: 20px;
+    }
+
+    .desc {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 30px 0;
+    }
+
+    .short-desc {
+        font-size: 28px;
+        font-weight: 900;
+    }
+
+    .amount {
+        font-size: 28px;
+        margin-bottom: 15px;
+    }
+
+    .long-desc {
+        background: #fff;
+        padding: 20px;
+        font-size: 15px;
+        font-weight: 400;
+        color: rgb(66, 66, 66);
+        border: solid 0.5px #ccc;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        line-height: 1.2;
+        white-space: pre-wrap;
+    }
+
+    .task-desc {
+        font-weight: 500;
+        margin-bottom: 20px;
+    }
+
+    .attachment {
+        color: #000;
+        margin: 20px 0;
+    }
+
+    .task-image {
+        width: 100%;
+        object-fit: cover;
+        height: 325px;
+        border-radius: 8px;
+    }
+
+    .company-logo {
+        width: 100px;
+        margin-bottom: 15px;
+    }
+
+    .created {
+        font-size: 14px;
+        color: gray;
+    }
+
+    .date {
+        font-size: 14px;
+        color: gray;
+        margin-bottom: 15px;
+    }
+
+    .countdown {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+
+    .instruction {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        font-size: 14px;
+        border: solid 0.5px #ccc;
+        border-radius: 5px;
+        margin: 20px 0;
+        padding: 10px;
+    }
+
+    .instruction i {
+        font-size: 40px;
+        color: #420A63;
+    }
+
+    .instruction p {
+        margin-top: 5px;
+        font-size: 10px;
+    }
+
+    .instruction-list .list-item i {
+        font-size: 14px;
+        color: green;
+        margin-right: 5px;
+    }
+
+    .instruction-list .list-item {
+        font-size: 14px;
+    }
+
+    .btn-accept {
+        width: 100%;
+        font-weight: 700;
+        padding: 10px 10px;
+        background: #FC6B26;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 15px;
+    }
+
+    .btn-process {
+        width: 100%;
+        font-weight: 700;
+        padding: 10px 10px;
+        color: #000;
+        background: transparent;
+        border: solid .5px #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .docs {
+        background: #fff;
+        padding: 20px;
+        font-size: 16px;
+        font-weight: 400;
+        border: solid 0.5px #ccc;
+        border-radius: 10px;
+    }
+
+    .docs-heading {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 10px;
+        font-weight: 500;
+        margin-bottom: 15px;
+    }
+    
+    .docs-heading span {
+        font-size: small;
+        font-weight: 400;
+        color: gray;
+    }
+    
+    .docs .icon {
+        margin-right: 5px;
+    }
+
+    .doc-instruction i {
+        color: #000;
+        margin-right: 5px;
+    }
+
+    .task-info {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 25px;
+    }
+    
+    .task-section {
+        position: fixed;
+        width: 335px;
+        padding: 20px;
+        background: #fff;
+        border: solid 1px #ccc;
+        border-radius: 10px;
+    }
+
+    .status {
+        font-size: 14px;
+        color: red;
+        margin-bottom: 20px;
+    }
+
+    .icon {
+        margin-right: 10px;
+    }
+
+    .related-title {
+        margin: 40px 0;
+        font-size: 24px;
+    }
+
+    .notice {
+        font-size: 14px;
+        font-weight: 400;
+        background: rgb(163, 255, 163);
+        padding: 20px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+
+    .notice span {
+        font-weight: 600;
+    }
+
+    .skill-title {
+        font-size: 16px;
+        font-weight: 500;
+        padding-top: 20px;
+        margin: 15px 0;
+        border-top: solid 0.5px #ccc;
+    }
+
+    .task-skills {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 20px;
+    }
+
+    .task-skill {
+        background: lightblue;
+        color: blue;
+        font-size: 12px;
+        border: solid 0.2px #fff;
+        border-radius: 20px;
+        padding: 5px 10px;
+    }
+
+    @media screen and (max-width: 567px) {
+
+        .task-info {
+        grid-template-columns: 1fr;
+    }
+
+    .task-section {
+        position: relative;
+        width: 100%;
+    }
+
+    }
+
+</style>
+
+<div class="main-container">
+
+    <div class="task-info">
+
+    <div class="task-item">
+    <h3 class="company-name">{{ task.company_name }}</h3>
+    <h2 class="task-title">{{ task.title }}</h2>
+
+    {% if not user.is_authenticated %}
+
+    <h3 class="notice">
+        You're viewing this as a Guest. 
+        <span>
+            <a href="{% url 'apply' task.id %}">
+                Login to apply!
+            </a>
+        </span>
+    </h3>
+
+    {% endif %}
+
+    {% if task.image %}
+        <img src="{{ task.image.url }}" class="task-image" alt="Task Image">
+    {% endif %}
+
+    <div class="desc">
+        <p class="short-desc">{{ task.short_description }}</p> 
+    </div>
+
+    <h4 class="task-desc">Task Description</h4>
+    <p class="long-desc">{{ task.long_description }}</p>
+
+    <h4 class="skill-title">Skills & Expertise Required</h4>
+        <div class="task-skills">
+            {% for skill in task.skills.all %}
+            <button class="task-skill">
+                {{ skill.name }}
+            </button>
+            {% endfor %}
+        </div>
+
+    {% if task.attached_file %}
+        <div class="docs">
+            <h4 class="docs-heading">Documents: 
+            <span class="doc-instruction"><i class="fa fa-info-circle"></i> These contain instruction on how to complete the task specifically to the task owner's satisfaction.</span> </h4>
+            <a href="{{ task.attached_file.url }}" class="attachment" download><i class="fa fa-file-pdf icon"></i> Task Instructions</a>
+        </div>
+    {% endif %}
+
+    {% if related_tasks %}
+
+    <div class="related-task">
+        <h1 class="related-title" >Related Tasks</h1>
+        <div class="card-grid">
+            {% for task in related_tasks %}
+            <div class="card-item">
+                {% if task.image %}
+                <img src="{{ task.image.url }}" class="image" alt="Task Image">
+                {% endif %}
+                            <div class="card-body">
+                                <div class="info">
+                                    <h2 class="card-title">{{ task.title }}</h2>
+                                </div>
+                                <p class="card-description"> {{ task.short_description|truncatewords:5 }} </p>
+                                <!-- <p class="card-description"> {{ task.short_description }} </p>       -->
+                                
+                                <!-- {% if user.is_authenticated %}
+                                    <form action="{% url 'toggle_favorite' task.id %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="submit" class="favorite" value="{% if task in user.favorite_tasks.all %} Remove from Favorites{% else %} Add to Favorites {% endif %}">
+                                    </form>
+                                {% else %}
+                                    <p>Login to add to Favorites.</p>
+                                {% endif %}  -->
+    
+                            </div>
+    
+                            <div class="card-footer">
+                                {% if request.user == task.created_by %}
+                                    <a href="{% url 'edit_task' task.id %}" class="edit">Edit</a>
+                                    <a href="{% url 'delete_task' task.id %}" class="delete">Delete</a>
+                                {% else %}
+                                    <a href="{% url 'task_detail' task.id %}" class="view-more">View More</a>
+                                {% endif %}
+        
+                                <div class="company-name"> 
+                                    {% if task.company_logo %}
+                                    <img src="{{ task.company_logo.url }}" class="company_logo">
+                                    {% endif %}
+                                </div>
+        
+                            </div>
+    
+                        </div>
+            {% empty %}
+            <p>No tasks have been created yet...</p>
+            {% endfor %}
+        </div>
+         {% comment %} End Tasks {% endcomment %}
+    </div>
+    
+    {% endif %}
+
+    
+    </div>
+        <div class="task-item">
+            <div class="task-section">
+                {% if task.company_logo %}
+                <img src="{{ task.company_logo.url }}" class="company-logo" alt="Company logo">
+                {% endif %}
+                <!-- <p class="created">Created by: {{ task.created_by }}</p>
+                <p class="date">Created at: {{ task.created_at }}</p> -->
+                <p class="countdown"><i class="fa fa-clock icon"></i> {{ task.countdown_duration }}</p>
+                <p class="amount">R{{ task.amount }}</p>
+
+                <ul class="instruction-list">
+                    <li class="list-item"><i class="fa fa-check"></i> 3 Revisions</li>
+                    <li class="list-item"><i class="fa fa-check"></i> Documents</li>
+                    <li class="list-item"><i class="fa fa-check"></i> Files supplied</li>
+                </ul>
+
+
+                <div class="instruction"> 
+                    <div>
+                        <i class="fa fa-shield"></i> 
+                    </div>
+                    <div>
+                        <a href="">
+                            <h4 class="instruction-header">Funti3r Payment Protection</h4>
+                        </a>
+                        <p>All Agents get paid once the project owner is satisfied with the work.</p>
+                    </div>
+                </div>
+
+                {% if task.status == 'active' %}
+                    <a href="{% url 'apply' task.id %}" ><button class="btn-accept">
+                        {% if user.is_authenticated %}
+                        Accept & Work
+                        {% else %}
+                        Login to apply
+                        {% endif %}
+                    </button></a>
+                {% else %}
+                    <p class="status">This task is not available anymore!</p>
+                {% endif %}
+
+                <a href="{% url 'apply' task.id %}" ><button class="btn-process">
+                    <i class="fa fa-gear icon"></i> How it works
+                </button></a>
+        </div>
+    </div>
+
+</div>
+
+<!-- Related Tasks -->
+
+
+
+{% endblock %}
+

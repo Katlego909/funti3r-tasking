@@ -1,0 +1,69 @@
+{% extends "myapp/nav-footer.html" %}
+{% block title %} Support | {% endblock title %}
+{% block content %}
+
+    <style>
+
+        *::-webkit-scrollbar {
+            display: none;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .form-section {
+            width: 50%;
+            margin: 35px auto;
+        }
+
+        .form-section h2 {
+            margin: 35px 0;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        input[type=text], 
+        input[type=email], 
+        textarea, 
+        select{
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin: 15px auto;
+        }
+
+        
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #420A63;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+
+  <div class="form-section">
+    <h2>Create a Support Ticket</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn">Submit</button>
+    </form>
+  </div>
+
+{% endblock content %}
+
+

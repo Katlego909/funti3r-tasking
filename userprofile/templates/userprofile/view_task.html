@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}View Task{% endblock title %}
+{% block content %}
+
+<style>
+    .title {
+        font-size: 40px;
+        margin-bottom: 20px;
+    }
+
+    .short-desc {
+        font-size: 28px;
+        font-weight: 900;
+        margin: 40px 0;
+    }
+
+    .long-desc {
+        margin: 20px 0;
+        background: #fff;
+        padding: 20px;
+        border: solid 1px #ccc;
+        border-radius: 10px;
+    }
+
+    .task-image {
+        width: 100%;
+        object-fit: cover;
+        height: 250px;
+        border-radius: 10px;
+    }
+
+    .subtitle {
+        margin: 20px 0;
+    }
+
+    .attachment {
+        margin-bottom: 20px;
+    }
+
+</style>
+
+<div class="main-container">
+    <h1 class="title">
+        View Task - {{ task.title }}
+    </h1>
+
+    {% for application in task.applications.all %}
+    {% if task.image %}
+        <img src="{{ task.image.url }}" class="task-image" alt="Task Image">
+    {% endif %}
+    
+    <p class="short-desc">{{ task.short_description }}</p>
+    <p class="long-desc">{{ task.long_description }}</p>
+
+    {% if task.attached_file %}
+        <a href="{{ task.attached_file.url }}" class="attachment" download><i class="fa fa-file"></i> Download File</a>
+    {% endif %}
+
+    <br>
+
+    <h2 class="subtitle">Applicants:</h2>
+    
+    <div class="task-items">
+        <div class="task-card">
+            <a href="{% url 'application' application.id %}"> <i class="fa fa-user-circle"></i> {{ application.created_by.username }}</a>
+        </div>
+    </div>
+
+    {% endfor %}
+    
+</div>
+
+{% endblock %}

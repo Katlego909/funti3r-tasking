@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Application Approved{% endblock title %}
+{% block content %}
+<div class="main-container">
+    {% if approved_message %}
+    <div class="alert alert-success" role="alert">
+        {{ approved_message }}
+    </div>
+    {% else %}
+    <div class="alert alert-danger" role="alert">
+        No approved message found.
+    </div>
+    {% endif %}
+</div>
+{% endblock content %}

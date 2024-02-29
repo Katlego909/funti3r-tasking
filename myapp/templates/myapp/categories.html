@@ -1,0 +1,89 @@
+{% extends "myapp/nav-footer.html" %}
+{% load static %}
+{% block title %}Categories | {% endblock title %}
+{% block content %}
+
+<div class="main">
+    
+    <!-- Hero -->
+
+    <div class="hero">
+        <div class="hero-section">
+            <h5 class="hero-subtitle">Explore Micro-tasking</h5>
+            <h1 class="hero-section-title">
+                Discover the diverse world of microtasking. 
+            </h1>
+                <p class="hero-text">Whether you're a seasoned microtasker or a newcomer looking to explore the endless possibilities.
+                </p>
+
+                <!-- Search bar -->
+
+                <div class="search-bar">
+                    <!-- <form method="get" action="{% url 'home' %}">
+                        <label for="category">Select a category:</label>
+                        <select name="category" id="category">
+                            <option value="" selected>All Categories</option>
+                            {% for category in categories %}
+                                <option value="{{ category.id }}">{{ category.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <input type="submit" value="Filter">
+                    </form> -->
+                </div>
+
+                <!-- Categories -->
+
+                <div class="hero-categories">
+                 
+                    <div class="categories">
+                            {% for category in categories %}
+                            <a href="{% url 'category_tasks' category.id %}">
+                                <button class="btn-category">
+                                    <i class="fa fa-search"></i> {{ category.name }}
+                                </button>
+                            </a>
+                            {% endfor %}
+                    </div>
+                </div>
+        </div>
+
+        <!-- Hero Image -->
+
+        <div class="hero-section">
+            <img src="{% static 'assets/images/category.jpg' %}" class="hero-img">
+        </div>
+
+        <!-- End Hero Image -->
+
+    </div>
+    <!-- End Hero -->
+</div>
+
+    <section class="category-tabs">
+        <div class="container">
+           <div class="section-header">
+               <h1 class="section-heading">All Categories</h1>
+               {% comment %} <a href="" class="see-all">See All <i class="fa fa-chevron-right"></i></a> {% endcomment %}
+           </div>
+           
+           <div class="categories-grid">
+            {% for category in categories %}
+            <a href="{% url 'category_tasks' category.id %}">
+                <div class="category-item">
+                    <div class="category-img">
+                        {% if category.icon %}
+                            <img src="{{ category.icon.url }}" class="category-icon" alt="{{ category.name }} Icon">
+                        {% endif %}
+                    </div>
+                    <div class="category-info">
+                        <h3>{{ category.name }}</h3>
+                        <p>{{ category.tasks.count }} items</p>
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+            </div>
+       </div>
+    </section>
+
+{% endblock  %}

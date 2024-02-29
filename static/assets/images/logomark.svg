@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 261.19 213.76">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5, .cls-6, .cls-7, .cls-8, .cls-9 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient-6);
+      }
+
+      .cls-3 {
+        fill: url(#linear-gradient-5);
+      }
+
+      .cls-4 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-5 {
+        fill: #f93512;
+      }
+
+      .cls-6 {
+        fill: url(#linear-gradient-7);
+      }
+
+      .cls-7 {
+        fill: url(#linear-gradient-3);
+      }
+
+      .cls-8 {
+        fill: url(#linear-gradient-8);
+      }
+
+      .cls-9 {
+        fill: url(#linear-gradient-4);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="151.12" y1="30.16" x2="261.19" y2="30.16" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#00a2f3"/>
+      <stop offset=".11" stop-color="#00adee"/>
+      <stop offset=".48" stop-color="#01cce2"/>
+      <stop offset=".79" stop-color="#01dfdb"/>
+      <stop offset="1" stop-color="#02e6d9"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="205.81" y1="76.82" x2="261.19" y2="76.82" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fc6523"/>
+      <stop offset="1" stop-color="#fd7c2b"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-3" x1="0" y1="102.77" x2="220.14" y2="102.77" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e919af"/>
+      <stop offset="1" stop-color="#8107d4"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-4" x1="109.74" y1="117.44" x2="110.07" y2="117.44" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f70501"/>
+      <stop offset="1" stop-color="#fd7c2b"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-5" x1="164.76" y1="164.74" x2="220.14" y2="164.74" xlink:href="#linear-gradient-2"/>
+    <linearGradient id="linear-gradient-6" x1="54.7" y1="165.17" x2="110.07" y2="165.17" xlink:href="#linear-gradient-2"/>
+    <linearGradient id="linear-gradient-7" x1="109.64" y1="181" x2="110.07" y2="181" xlink:href="#linear-gradient-4"/>
+    <linearGradient id="linear-gradient-8" x1="110.07" y1="181.08" x2="110.66" y2="181.08" xlink:href="#linear-gradient-4"/>
+  </defs>
+  <g id="Layer_1-2" data-name="Layer 1">
+    <g>
+      <g>
+        <path class="cls-1" d="m261.19,28.67l-55.38,31.65-54.69-31.65L197.49,2.29c5.37-3.06,11.96-3.06,17.33,0l46.38,26.38Z"/>
+        <polygon class="cls-5" points="206.15 124.98 151.12 92.65 151.12 28.67 205.81 60.31 206.15 124.98"/>
+        <polygon class="cls-4" points="261.19 28.67 261.19 91.96 206.15 124.98 205.81 60.31 261.19 28.67"/>
+      </g>
+      <g>
+        <g>
+          <path class="cls-7" d="m220.14,116.59l-55.03,31.44-.34.2-54.69-31.64-55.03,32.31-.34.2L0,117.44l55.04-31.3,46.09-27.22c5.53-3.26,12.39-3.3,17.95-.1l43.79,25.17,2.24,1.29,55.03,31.3Z"/>
+          <polygon class="cls-9" points="110.07 117.44 109.74 117.64 109.74 117.25 110.07 117.44"/>
+          <polygon class="cls-5" points="55.04 213.76 0 181.42 0 117.44 54.7 149.09 55.04 213.76"/>
+        </g>
+        <polygon class="cls-3" points="220.14 116.59 220.14 179.88 165.11 212.9 164.76 148.44 165.11 148.23 165.11 148.03 220.14 116.59"/>
+        <g>
+          <polygon class="cls-2" points="110.07 116.59 110.07 117.44 109.74 117.25 109.74 117.64 110.07 117.44 110.07 180.74 109.64 181 55.04 213.76 54.7 149.09 55.04 148.9 110.07 116.59"/>
+          <polygon class="cls-9" points="110.07 117.44 109.74 117.64 109.74 117.25 110.07 117.44"/>
+          <polyline class="cls-6" points="109.64 181 110.07 181.26 110.07 180.74"/>
+          <polygon class="cls-5" points="165.11 212.9 110.66 180.91 110.07 180.56 110.07 116.59 164.76 148.23 164.76 148.44 165.11 212.9"/>
+          <line class="cls-8" x1="110.66" y1="180.91" x2="110.07" y2="181.26"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

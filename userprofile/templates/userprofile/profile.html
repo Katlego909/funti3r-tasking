@@ -1,0 +1,272 @@
+{% extends "base.html" %}
+{% block title %}Profile{% endblock title %}
+{% block content %}
+
+<style>
+
+    .profile-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 25px;
+    }
+
+    .btn-primary {
+        padding: 10px 15px;
+        border: solid 0.5px #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .btn-primary:hover {
+        background: #ccc;
+    }
+
+    .username {
+        font-size: 16px;
+        font-weight: 400;
+        margin-top: 20px;
+    }
+
+    .account-type {
+        font-size: 14px;
+        color: #fff;
+        border: solid 1px #ccc;
+        color: black;
+        padding: 10px 20px;
+        text-align: center;
+        font-weight: 500;
+        text-decoration: none;
+        display: inline-block;
+        margin: 10px 0;
+        border-radius: 5px;
+      }
+
+      .title {
+        font-weight: bold;
+        margin-top: 20px;
+      }
+
+      .task {
+        background: #ccc;
+        margin-bottom: 10px;
+        padding: 10px;
+      }
+
+      .date-created {
+        font-size: 12px;
+        margin-top: 5px;
+        color: gray;
+      }
+
+      .summary {
+        font-size: 14px;
+        margin-top: 15px;
+      }
+
+      .description {
+        margin-top: 20px;
+      }
+
+      .profile-picture {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        margin: 15px 0;
+        object-fit: cover;
+        object-position: center;
+        border: solid 0.5px #ccc;
+      }
+
+      .profile-buttons {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      .profile-buttons i {
+        margin-right: 5px;
+      }
+
+      .user-info {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 10px;
+        background: #fff;
+        margin-bottom: 20px;
+        padding: 20px;
+        border: solid 0.2px #ccc;
+        border-radius: 5px;
+      }
+
+      .user-industry {
+        font-size: 12px;
+        text-align: center;
+        background: lightgreen;
+        color: green;
+        padding: 5px;
+        border-radius: 2px;
+        margin-top: 5px;
+      }
+
+      .application-status {
+        margin-bottom: 15px;
+        padding-bottom: 20px;
+        border-bottom: solid 0.5px #ccc;
+    }
+
+    .status {
+        font-size: 12px;
+    }
+
+    .status-pending {
+        background: rgb(255, 218, 148);
+        color: orange; /* Change the color for pending status */
+        padding: 5px 10px;
+        border-radius: 20px;
+    }
+    
+    .status-approved {
+        background: lightgreen;
+        color: green; /* Change the color for approved status */
+        padding: 5px 10px;
+        border-radius: 20px;
+    }
+    
+    .status-rejected {
+        background: rgb(248, 170, 170);
+        color: red; /* Change the color for rejected status */
+        padding: 5px 10px;
+        border-radius: 20px;
+    }
+
+    .status-app {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    @media screen and (max-width: 768px) {
+
+        .profile-info {
+            display: block;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+
+        .profile-info h1 {
+            margin-bottom: 25px;
+        }
+
+    }
+
+</style>
+
+<div class="main-container">
+    
+    <div class="profile-info">
+        <h1>My Profile</h1>
+
+        <div class="profile-buttons">
+
+            {% if request.user.userprofile.is_company %}
+                <a href="{% url 'add_task' %}">
+                    <button class="btn-primary">Add New Task</button>
+                </a>
+            {% else %}
+            <a href="{% url 'tasks' %}">
+                <button class="btn-primary"><i class="fa fa-list"></i> Start Task</button>
+            </a>
+            {% endif %}
+
+            <a href="{% url 'recommended-tasks' %}">
+                <button class="btn-primary"><i class="fa fa-thumbs-up"></i> Recommendations</button>
+            </a>
+            
+            <a href="{% url 'edit_profile' %}">
+                <button class="btn-primary"><i class="fa fa-edit"></i> Edit</button>
+            </a>
+        
+        </div>
+    </div>
+
+    <!-- Display the profile picture if it exists -->
+
+    <div class="user-info">
+        {% if userprofile.profile_picture %}
+        <img src="{{ userprofile.profile_picture.url }}" alt="Profile Picture" class="profile-picture">
+        {% endif %}
+        <div>
+            <h3 class="username"><strong>{{ request.user.username }}</strong></h3>
+            <p class="user-industry">{{ userprofile.industry }}</p>  
+        </div>
+    </div>
+
+    {% if userprofile.is_company %}
+        {% comment %} <a href="#">
+            <button class="company account-type">
+                <i class="fa fa-briefcase"></i> <span>Company Account</span> 
+            </button>
+        </a><br> {% endcomment %}
+
+        <hr>
+
+        <h1 class="title">My Tasks</h1>
+        <br>
+    
+        <div class="task-items">
+        {% for task in request.user.tasks.all %}
+       
+            <div class="task-card">
+                <a href="{% url 'view_task' task.id %}"> <b>{{ task.title }}</b></a>
+                <p class="date-created">{{ task.created_at }}</p>
+                <p class="description">{{ task.short_description }}</p>
+            </div>
+        
+        {% empty %}
+        <p>You don't have any tasks yet!</p>
+        {% endfor %}
+        </div>
+
+    {% else %}
+
+    {% comment %} <button class="agent account-type">
+        <i class="fa fa-user-circle"></i> <span>Agent Account</span>
+    </button><br> {% endcomment %}
+
+    <hr>
+    
+    <h1 class="title">My Applications</h1>
+    <br>
+
+    <div class="task-items">
+    {% for application in request.user.applications.all  %}
+    <div class="task-card">
+        <div class="application">
+            <div class="status-app">
+                <a href="{% url 'application' application.id %}"> <b>{{ application.task.title }}</b></a>
+                {% if application %}
+               <p class="status"><span class="status-{{ application.approval_status }}">{{ application.get_approval_status_display }}</span></p>
+            {% endif %}
+            </div>
+            <p class="date-created">{{ application.created_at }}</p>
+            <p class="summary">{{ application.experience|truncatewords:10 }}</p>
+        </div>
+
+        <div class="application">
+            
+        </div>
+
+    </div>
+    {% empty %}
+        <p>You have not applied for any tasks yet!</p>
+    {% endfor %}
+    {% endif %}
+    </div>
+
+
+</div>
+{% endblock content %}

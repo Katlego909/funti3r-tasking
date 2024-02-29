@@ -1,0 +1,14 @@
+{% extends "myapp/base.html" %}
+{% block title %}To Do{% endblock title %}
+{% block content %}
+<h1>List of To Do's</h1>
+<h2>{{ls.name}}</h2>
+
+<ul>
+    {% for item in ls.item_set.all %}
+            <li>{{ item.text }}</li>
+    {% endfor %}
+</ul>
+
+
+{% endblock content %}

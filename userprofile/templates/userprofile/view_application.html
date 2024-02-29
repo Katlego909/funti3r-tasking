@@ -1,0 +1,234 @@
+{% extends "base.html" %}
+{% block title %}View Application{% endblock title %}
+{% block content %}
+
+<style>
+
+    .application-heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+    }
+
+    .username {
+        font-size: 14px;
+    }
+
+    .date-added {
+        font-size: 12px;
+        color: grey;
+        margin: 2px 0;
+    }
+
+    .notification {
+        background: lightblue;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .message {
+        margin-top: 10px;
+    }
+
+    .subtitle {
+        font-size: 24px;
+    }
+
+    .btn-application {
+        padding: 10px 15px;
+        border: solid 1px #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .textarea {
+        width: 100%;
+        padding: 20px;
+        border: solid 0.5px #ccc;
+        outline: none;
+        border-radius: 5px;
+    }
+
+    .message-field {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px; 
+    }
+
+    .sticky-message-field {
+        position: sticky;
+        overflow: hidden;
+        width: 100%;
+        bottom: 0;
+        z-index: 10000; 
+    }
+
+    .content {
+        margin: 10px 0;
+    }
+
+    .btn-message {
+      background: #420A63;
+      color: #fff;
+      padding: 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .message-sent {
+        font-size: 10px;
+        color: grey;
+        margin-top: 10px;
+    }
+
+    .application-btn {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .cover, .experience {
+        background: #fff;
+        padding: 20px;
+        margin: 20px 0;
+    }
+    
+    .cover p, .experience p {
+        hyphens: auto;
+        overflow: visible;
+        font-size: 16;
+        font-weight: 400;
+        word-break: break-all;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+    }
+
+    .application-status {
+        margin-bottom: 15px;
+        padding-bottom: 20px;
+        border-bottom: solid 0.5px #ccc;
+    }
+
+    .application-status .status {
+        margin: 25px 0;
+    }
+
+    .status-pending {
+        background: rgb(255, 218, 148);
+        color: orange; /* Change the color for pending status */
+        padding: 5px 10px;
+        border-radius: 20px;
+    }
+    
+    .status-approved {
+        background: lightgreen;
+        color: green; /* Change the color for approved status */
+        padding: 5px 10px;
+        border-radius: 20px;
+    }
+    
+    .status-rejected {
+        background: rgb(248, 170, 170);
+        color: red; /* Change the color for rejected status */
+        padding: 5px 10px;
+        border-radius: 20px;
+    }
+    
+</style>
+
+<div class="main-container">
+
+    <div class="application-heading">
+        <div class="heading">
+            <h1 class="title">
+                View Application
+            </h1>
+        </div>
+    
+        <div class="application-btn">
+            <form action="" method="post">
+                {% csrf_token %}
+                <button type="submit" name="delete_application" class="btn-application"><i class="fa fa-trash"></i></button>
+            </form>
+            <form action="{% url 'edit_application' application.id %}"method="get">
+                <button type="submit" class="btn-application"><i class="fa fa-edit"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <div class="application-status">
+        <h2>Application Status</h2>
+    
+            {% if application %}
+                <p class="status"><span class="status-{{ application.approval_status }}">{{ application.get_approval_status_display }}</span></p>
+                {% if application.approved_by %}
+                    <p>Approved by: {{ application.approved_by.username }}</p>
+                {% endif %}
+                {% if application.assigned_to %}
+                    <p>Assigned to: {{ application.assigned_to.username }}</p>
+                {% endif %}
+    
+                {% comment %} {% if request.user.is_superuser %}
+                    {% if application.approval_status == 'pending' %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <button type="submit" name="approve_application">Approve and Assign</button>
+                        </form>
+                    {% endif %}
+                {% endif %} {% endcomment %}
+                
+            {% else %}
+                <p>No application found.</p>
+            {% endif %}
+    </div>
+
+    <h2 class="subtitle">
+        {{ application.task.title }}
+    </h2>
+
+    <p class="date-added">Application submitted at: {{ application.created_at }}</p>
+
+    <div class="cover">
+        <p><strong>Cover Letter: </strong> <br>{{ application.cover_letter }} </p>
+    </div>
+    <div class="experience">
+        <p><strong>Experience: </strong> <br>{{ application.experience }} </p><br>
+    </div>
+    <p class="email"><strong>Email: </strong> <br>  <a href="mailto:{{ application.email }}">{{ application.email }}</a></p><br>
+    <p class="linkedin"><strong>LinkedIn: </strong><br> <a href="{{ application.linkedin_profile }}">{{ application.linkedin_profile }}</a></p><br>
+    <hr><br>
+
+    <div class="subtitle"> <i class="fa-regular fa-comments"></i> Conversation</div>
+
+    {% for message in application.conversationmessages.all %}
+    <br>
+        <div class="notification">
+            <b class="username">{{ message.created_by.username }} - {{ message.created_at|timesince }} ago</b>
+            <br>
+            <p class="message">
+                {{ message.content }}
+            </p>
+            <p class="message-sent">Message sent {{ message.created_at }}</p>
+        </div>
+    {% empty %}
+    <br>
+        <p class="start-conversation">No messages yet...</p>
+    {% endfor %}
+
+    <br>
+
+    <form method="POST" action=".">
+        {% csrf_token %}
+        <div class="message-field sticky-message-field">
+            <textarea class="textarea" name="content" id="id_message"  cols="10" rows="1" placeholder="Enter Your Message"></textarea>
+            <button type="submit" class="btn-message"><i class="fa fa-chevron-right"></i></button>
+        </div>
+    </form>
+
+</div>
+
+{% endblock %}

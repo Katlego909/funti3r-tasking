@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+{% block title %}Lesson Detail: {{ lesson.title }}{% endblock title %}
+{% block content %}
+<div class="main-container">
+
+    <style>
+
+        .lesson-image {
+            width: 100%;
+            object-fit: cover;
+            height: 325px;
+            border-radius: 8px;
+        }
+
+        .lesson-grid {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 50px;
+        }
+
+        .grid-item:last-child {
+            position: absolute;
+            right: 30px;
+            width: 20%;
+            background-color: #fff;
+            padding: 20px;
+            border: solid 0.2px #ccc;
+            border-radius: 5px;
+        }
+
+        .lesson-heading {
+            margin-bottom: 20px;
+        }
+
+        .lesson-content {
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.4;
+            margin: 20px 0;
+        }
+
+        .chapter {
+            font-size: 14px;
+            color: #000;
+            padding: 5px 0;
+            text-decoration: none;
+        }
+
+        .chapter a {
+            color: #000;
+        }
+
+        .chapter-resource {
+            margin-bottom: 20px;
+        }
+
+        .lesson-resource {
+            margin: 15px 0;
+        }
+
+        .resource-file a {
+            font-size: 14px;
+            color: #000;
+        }
+
+        .resources {
+            background: #fff;
+            padding: 20px;
+            border: solid 0.2px #ccc;
+            border-radius: 5px;
+        }
+
+        .enroll-message {
+            font-size: 14px;
+            color: orangered;
+            margin-top: 15px;
+            padding: 10px;
+            border: solid 0.2px #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .icon {
+            margin-right: 10px;
+        }
+
+        .btn-complete {
+            width: 100%;
+            margin-top: 15px;
+            padding: 10px 20px;
+            color: #fff;
+            background: orangered;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        @media screen and (max-width: 768px) {
+
+            .lesson-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .grid-item:last-child {
+                position: relative;
+                margin-left: 30px;
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+    <div class="lesson-grid">
+        
+        <div class="grid-item">
+
+            <h1 class="lesson-heading">{{ lesson.title }}</h1>
+
+            {% if lesson.image %}
+                <img src="{{ lesson.image.url }}" class="lesson-image" alt="Lesson Image">
+            {% endif %}
+
+            <p class="lesson-content">{{ lesson.content|safe }}</p>
+            
+        {% if resources %}
+        <h3 class="lesson-resource">Lesson Resources:</h3>
+        <ul class="resources">
+            {% for resource in resources %}
+                <li class="resource-file"><a href="{{ resource.resource_file.url }}"><i class="fa fa-file icon"></i> {{ resource.title }}</a></li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        </div>
+
+        <div class="grid-item">
+
+            {% if chapters %}
+            <h3 class="chapter-resource">Chapters:</h3>
+            <ul>
+                {% for chapter in chapters %}
+                    <li class="chapter"><a href="{% url 'chapter_detail' course_id=lesson.course.id lesson_id=lesson.id chapter_id=chapter.id %}" ><i class="fa fa-file icon"></i> Chapter {{ chapter.order }} - {{ chapter.title }}</a></li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+            {% if not lesson_completed %}
+            <form method="post" action="{% url 'mark_as_complete' lesson.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn-complete"><i class="fa fa-check icon"></i>Mark as Complete</button>
+            </form>
+        {% else %}
+            <p class="enroll-message">You have already completed this lesson.</p>
+        {% endif %}
+        </div>
+
+    </div>
+
+</div>
+{% endblock content %}

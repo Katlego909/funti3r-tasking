@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Notifications{% endblock title %}
+{% block content %}
+
+<style>
+    .title {
+        margin-bottom: 30px;
+    }
+</style>
+
+<div class="main-container">
+    <h1 class="title">Notifications</h1>
+
+    {% if not notifications %}
+        No notifications yet!
+    {% endif %}
+
+
+    
+    {% for notification in notifications %}
+
+        <div class="notification">
+            <p>
+                <div class="task-items">
+                {% if notification.notification_type == "message" %}
+                
+                        <div class="task-card">
+                            <a href="{% url 'notifications' %}?goto=application&notification={{ notification.id }}&extra_id={{ notification.extra_id }}">
+                            <i class="fa fa-bell"></i>
+                            <strong>{{ notification.created_by.username }} sent you a message.</strong><br>
+                            <small>{{ notification.created_at|timesince }} ago</small>
+                            </a>
+                        </div>
+                
+        
+                {% elif notification.notification_type == 'application' %}
+                <div class="task-card">
+                <a href="{% url 'notifications' %}?goto=application&notification={{ notification.id }}&extra_id={{ notification.extra_id }}">
+                    <i class="fa fa-envelope"></i>
+                    <strong>{{ notification.created_by.username }} applied for your task.</strong><br>
+                    <small>{{ notification.created_at|timesince }} ago</small>
+                </a>
+            </div>
+                {% endif %}
+            </div>
+            </p>
+        </div>
+
+    {% endfor %}
+</div>
+{% endblock %}

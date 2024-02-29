@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Approve and Assign Task</h2>
+
+  <p>{{ task.title }}</p>
+
+  <form method="post" action="{% url 'approve_and_assign_task' task_id=task.id %}">
+    {% csrf_token %}
+
+    <label for="selected_application">Select an application to approve and assign:</label>
+    <select name="selected_application" id="selected_application">
+      {% for application in applications %}
+        <option value="{{ application.id }}">{{ application.created_by.username }} - {{ application.email }}</option>
+      {% endfor %}
+    </select>
+
+    <button type="submit">Approve and Assign</button>
+  </form>
+{% endblock %}

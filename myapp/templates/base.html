@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/icons/favicon.svg' %}">
+   
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/task_list.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/card.css' %}">
+
+    <script src="{% static 'js/drag.js' %}" defer></script>
+
+    <title> {% block title %}{% endblock title %} | Funti3r Micro-tasking</title>
+    <meta name="description" content="" />
+
+  </head>
+  <body>
+    <div class="grid-container">
+      <!-- Header -->
+      <header class="header">
+
+        <div class="menu-icon" onclick="openSidebar()">
+            <span><i class="fa fa-dashboard" style="font-size: 28px"></i></span>
+        </div>
+
+        <div class="header-left">
+          <span>
+            <a href="">
+              <i class="fa fa-search"></i>
+            </a>
+          </span>
+        </div>
+        <div class="header-right">
+          <span>
+            <a href="#" >
+              <i class="fa fa-envelope" style="position: relative;">
+                {% if notifications %}
+                {% comment %} <small style="position: absolute; bottom: 10px; left:5px;font-size:10px; background: red; padding: 2px 4px;border-radius:50%;"></small> {% endcomment %}
+                {% endif %}
+              </i>
+            </a>
+          </span>
+          <span>
+            <a href="{% url 'notifications' %}" >
+              <i class="fa fa-bell" style="position: relative;">
+                {% if notifications %}
+                <small style="position: absolute; bottom: 10px; left:5px;font-size:10px; background: red; padding: 2px 4px; border-radius:50%;">{{ notifications.count }}</small>
+                {% endif %}
+              </i>
+            </a>
+          </span>
+
+          <span>
+              <div class="dropdown">
+                <i class="fa fa-user-circle dropbtn"><small> 
+
+                  {% if user.is_authenticated %}
+                  {{ request.user }}
+                  {% else %}
+                  Guest User
+                  {% endif %}
+                </small></i>
+
+                <div class="dropdown-content">
+                  <a href="{% url 'profile' %}">Profile</a>
+                  <a href="">Settings</a>
+                  <a href="">Help</a>
+                  <a href="{% url 'logout' %}">Logout <i class="fa fa-sign-out"></i></a>
+                </div>
+              </div>
+          </span>
+
+          {% comment %} <span>
+            <a href="{% url 'logout' %}">
+              <i class="fa fa-sign-out"></i>
+            </a>
+          </span> {% endcomment %}
+
+        </div>
+      </header>
+      <!-- End Header -->
+
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <div class="sidebar-title">
+          <div class="sidebar-brand">
+            <a href="{% url 'dashboard' %}">
+              <span
+                 style="font-family: Space Grotesk, Arial, sans-serif;">
+                <img class="logo" src="{% static 'assets/images/logomark.svg' %}" alt="" />
+                Funti3r</span>
+            </a>
+          </div>
+          <span>
+            <img class="close" src="{% static 'assets/icons/x.svg' %}" onclick="closeSidebar()"
+          /></span>
+        </div>
+
+        <nav>
+
+          <ul class="navbar-links"> 
+            <li class="nav-link">
+              <a href="{% url 'dashboard' %}">
+                <img src="{% static 'assets/icons/grid.svg' %}" alt="" />
+                <span>Dashboard</span>
+              </a>
+            </li>
+
+            <li class="nav-link">
+              <a href="{% url 'tasks' %}">
+                <img src="{% static 'assets/icons/shop.svg' %}" alt="" />
+                <span>Task Marketplace</span>
+              </a>
+            </li> 
+
+            <li class="nav-link">
+              <a href="{% url 'course_list' %}">
+                <img src="{% static 'assets/icons/book.svg' %}" alt="" />
+                <span>Academy</span>
+              </a>
+            </li>
+
+            <h3 class="navbar-section">My Workspace</h3>
+
+            {% comment %} <li class="nav-link">
+              <a href="{% url 'tasks' %}">
+                <img src="{% static 'assets/icons/list-task.svg' %}" alt="" />
+                <span>Recent Tasks</span>
+              </a>
+            </li> {% endcomment %}
+
+            {% comment %} <li class="nav-link">
+              <a href="{% url 'documents' %}" class="disabled">
+                <img src="{% static 'assets/icons/file.svg' %}" alt="" />
+                <span>Templates</span>
+                <span class="coming-soon">Coming Soon</span>
+              </a>
+            </li> {% endcomment %}
+
+            <li class="nav-link">
+              <a href="{% url 'kanban_board' %}" class="disabled">
+                <img src="{% static 'assets/icons/kanban.svg' %}" alt="" />
+                <span>Kanban Board</span>
+                <span class="coming-soon">Coming Soon</span>
+              </a>
+            </li>
+            <li class="nav-link">
+              <a href="{% url 'notes' %}">
+                <img src="{% static 'assets/icons/card-text.svg' %}" alt="" />
+                <span>Notes</span>
+              </a>
+            </li>
+
+            <h3 class="navbar-section">AI Tools</h3>
+
+            <li class="nav-link">
+              <a href="{% url 'chatpdf' %}" class="disabled">
+                <img src="{% static 'assets/icons/file-pdf.svg' %}" alt="" />
+                <span>chatPDF</span>
+                <span class="coming-soon">Coming Soon</span>
+              </a>
+            </li>
+
+            <li class="nav-link">
+              <a href="{% url 'assistant' %}" class="disabled">
+                <img src="{% static 'assets/icons/robot.svg' %}" alt="" />
+                <span>AI Assistant</span>
+                <span class="coming-soon">Coming Soon</span>
+              </a>
+            </li>
+
+            {% comment %} <li class="nav-link">
+              <a href="">
+                <img src="{% static 'assets/icons/grid.svg' %}" alt="" />
+                <span>Templates</span>
+              </a>
+            </li> {% endcomment %}
+
+            <h3 class="navbar-section">Profile</h3>
+
+            <li class="nav-link">
+              <a href="{% url 'profile' %}">
+                <img src="{% static 'assets/icons/person.svg' %}" alt="" />
+                <span>My Profile </span>
+              </a>
+            </li>
+
+            {% comment %} <li class="nav-link">
+              <a href="{% url 'academy' %}">
+                <img src="{% static 'assets/icons/wallet.svg' %}" alt="" />
+                <span>Wallet</span>
+              </a>
+            </li> {% endcomment %}
+            
+            {% comment %} <li class="nav-link">
+              <a href="">
+                <img src="{% static 'assets/icons/wallet.svg' %}" alt="" />
+                <span>Messages</span>
+              </a>
+            </li> {% endcomment %}
+
+            <li class="nav-link">
+              <a href="{% url 'logout' %}">
+                <img src="{% static 'assets/icons/box-arrow-right.svg' %}" alt="" />
+                <span>Logout</span>
+              </a>
+            </li>
+           
+            </li>
+          </ul>
+        </nav>
+        
+        <div class="upgrade">
+          <a href="/">
+            <img src="{% static 'assets/icons/star.svg' %}" alt="" />
+            <h4>Upgrade to PRO</h4>
+          </a>
+        </div>
+
+      </aside>
+
+      <!-- End Sidebar -->
+      
+      <!-- Main -->
+      <main class="main-container">
+                {% block content %}
+                {% endblock content %}
+      </main>
+      <!-- End Main -->
+    </div>
+
+    <!-- Custom JS -->
+
+    <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+    <script>
+      window.botpressWebChat.init({
+          "composerPlaceholder": "Chat with Funti3r",
+          "botConversationDescription": "A helpful bot for Funti3r Micro-tasking and Research",
+          "botId": "7d436e99-647d-472c-add0-e20ac38e443c",
+          "hostUrl": "https://cdn.botpress.cloud/webchat/v1",
+          "messagingUrl": "https://messaging.botpress.cloud",
+          "clientId": "7d436e99-647d-472c-add0-e20ac38e443c",
+          "webhookId": "39b777b3-758b-4558-b267-edec89939354",
+          "lazySocket": true,
+          "themeName": "prism",
+          "botName": "Funti3r",
+          "stylesheet": "https://webchat-styler-css.botpress.app/prod/d0e1281b-1505-4184-8e48-c42bccb4263b/v49628/style.css",
+          "frontendVersion": "v1",
+          "useSessionStorage": true,
+          "enableConversationDeletion": true,
+          "theme": "prism",
+          "themeColor": "#2563eb"
+      });
+    </script>
+
+    <script src="{% static 'js/script.js' %}"></script>
+    
+  </body>
+</html>

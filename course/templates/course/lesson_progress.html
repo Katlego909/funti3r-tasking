@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Learner Progress{% endblock title %}
+{% block content %}
+
+<div class="main-container">
+
+    {% extends "base.html" %}
+{% block title %}Course List{% endblock title %}
+{% block content %}
+
+<style>
+    a {
+        color: #000;
+        text-decoration: none;
+    }
+
+    .grid-items {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .grid-card {
+        color: #fff;
+        background-color: gray;
+        padding: 10px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .grid-card:hover {
+        color: blue;
+        background-color: #fff;
+    }
+
+</style>
+
+<div class="main-container">
+
+    <h1>Course List</h1>
+    {% for category, courses in courses_by_category.items %}
+        <h2>{{ category.name }}</h2>
+        <div class="grid-items">
+
+            {% for course in courses %}
+            <a href="{% url 'course_detail' course.id %}" class="grid-card">
+                    <h3>{{ course.title }}</h3>
+                    <p>{{ course.description|truncatewords:45 }}</p>
+            </a>
+            {% endfor %}
+
+        </div>
+    {% endfor %}
+
+</div>
+{% endblock content %}
+
+</div>
+{% endblock content %}

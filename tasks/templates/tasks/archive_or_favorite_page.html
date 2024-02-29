@@ -1,0 +1,55 @@
+<!-- archive_or_favorite_page.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="main-container">
+    <h2 class="heading">{{ status|title }}</h2>
+    {% if tasks %}
+    <div class="card-grid">
+        {% for task in tasks %}
+           <div class="card-item">
+            {% if task.image %}
+            <img src="{{ task.image.url }}" class="image" alt="Task Image">
+            {% endif %}
+                        <div class="card-body">
+                            <div class="info">
+                                <a href="{% url 'task_detail' task.id %}">
+                                    <h2 class="card-title">{{ task.title }}</h2>
+                                </a>
+                                <h2 class="card-amount">R {{ task.amount }}</h2>
+                            </div>
+                            <p class="card-description"> {{ task.short_description }} </p>             
+                        </div>
+
+                        <div class="card-footer">
+                            {% if request.user == task.created_by %}
+                                <a href="{% url 'edit_task' task.id %}" class="edit">Edit</a>
+                                <a href="{% url 'delete_task' task.id %}" class="delete">Delete</a>
+                            {% else %}
+                                <a href="{% url 'task_detail' task.id %}" class="view-more">View More</a>
+                            {% endif %}
+
+                            <div class="company-name"> 
+                                {% if task.company_logo %}
+                                <img src="{{ task.company_logo.url }}" class="company_logo">
+                                {% endif %}
+                            </div>
+
+                        </div>
+
+                    </div>
+        {% empty %}
+        <p>No tasks have been created yet...</p>
+        {% endfor %}
+    </div>
+
+     {% comment %} End Tasks {% endcomment %}
+
+</div>
+    {% else %}
+        <p>No tasks found.</p>
+    {% endif %}
+</div>
+{% endblock %}
+

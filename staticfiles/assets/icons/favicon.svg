@@ -1,0 +1,77 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!--Generator: Xara Designer (www.xara.com), SVG filter version: 6.6.0.9-->
+<svg fill="none" fill-rule="evenodd" stroke="black" stroke-width="0.501" stroke-linejoin="bevel" stroke-miterlimit="10" font-family="Times New Roman" font-size="16" style="font-variant-ligatures:none" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1" overflow="visible" width="24.001pt" height="24.003pt" viewBox="-433.812 -530.557 24.001 24.003">
+ <defs>
+  <linearGradient id="LinearGradient" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="7.168" y2="0" gradientTransform="translate(-420.475 523.551)">
+   <stop offset="0" stop-color="#00a2f3"/>
+   <stop offset="0.109999999403954" stop-color="#00adee"/>
+   <stop offset="0.480000019073486" stop-color="#01cce2"/>
+   <stop offset="0.789999961853027" stop-color="#01dfdb"/>
+   <stop offset="1" stop-color="#02e6d9"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_1" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="3.606" y2="0" gradientTransform="translate(-416.913 520.513)">
+   <stop offset="0" stop-color="#fc6523"/>
+   <stop offset="1" stop-color="#fd7c2b"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_2" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="14.334" y2="0" gradientTransform="translate(-430.315 518.824)">
+   <stop offset="0" stop-color="#e919af"/>
+   <stop offset="1" stop-color="#8107d4"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_3" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0.023" y2="0" gradientTransform="translate(-423.17 517.869)">
+   <stop offset="0" stop-color="#f70501"/>
+   <stop offset="1" stop-color="#fd7c2b"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_4" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="3.606" y2="0" gradientTransform="translate(-419.587 514.787)">
+   <stop offset="0" stop-color="#fc6523"/>
+   <stop offset="1" stop-color="#fd7c2b"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_5" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="3.606" y2="0" gradientTransform="translate(-426.753 514.76)">
+   <stop offset="0" stop-color="#fc6523"/>
+   <stop offset="1" stop-color="#fd7c2b"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_6" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0.023" y2="0" gradientTransform="translate(-423.17 517.869)">
+   <stop offset="0" stop-color="#f70501"/>
+   <stop offset="1" stop-color="#fd7c2b"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_7" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0.029" y2="0" gradientTransform="translate(-423.176 513.729)">
+   <stop offset="0" stop-color="#f70501"/>
+   <stop offset="1" stop-color="#fd7c2b"/>
+  </linearGradient>
+  <linearGradient id="LinearGradient_8" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0.038" y2="0" gradientTransform="translate(-423.147 513.723)">
+   <stop offset="0" stop-color="#f70501"/>
+   <stop offset="1" stop-color="#fd7c2b"/>
+  </linearGradient>
+  <style type="text/css">@import url('https://themes.googleusercontent.com/fonts/css?family=Open Sans:400,600');</style>
+ </defs>
+ <g id="Layer 1" transform="scale(1 -1)">
+  <g id="Group" stroke-linejoin="miter" stroke="none">
+   <rect x="-433.811" y="506.555" width="24" height="24.002" fill="#ffffff" stroke-linecap="round" stroke-width="0.75"/>
+   <g id="Group_1" fill-rule="nonzero" stroke-width="0">
+    <g id="Group_2">
+     <g id="Group_3">
+      <path d="M -413.307,523.649 L -416.913,521.588 L -420.475,523.649 L -417.455,525.366 C -417.106,525.566 -416.676,525.566 -416.327,525.366 L -413.307,523.649 Z" marker-start="none" marker-end="none" fill="url(#LinearGradient)"/>
+      <path d="M -416.892,517.377 L -420.475,519.483 L -420.475,523.649 L -416.913,521.588 L -416.892,517.377 Z" fill="#f93512" marker-start="none" marker-end="none"/>
+      <path d="M -413.307,523.649 L -413.307,519.527 L -416.892,517.377 L -416.913,521.588 L -413.307,523.649 Z" marker-start="none" marker-end="none" fill="url(#LinearGradient_1)"/>
+     </g>
+     <g id="Group_4">
+      <g id="Group_5">
+       <path d="M -415.981,517.923 L -419.564,515.877 L -419.585,515.864 L -423.147,517.923 L -426.73,515.82 L -426.753,515.805 L -430.315,517.869 L -426.732,519.907 L -423.73,521.678 C -423.369,521.89 -422.922,521.892 -422.561,521.685 L -419.709,520.045 L -419.564,519.961 L -415.981,517.923 Z" marker-start="none" marker-end="none" fill="url(#LinearGradient_2)"/>
+       <path d="M -423.147,517.869 L -423.17,517.854 L -423.17,517.881 L -423.147,517.869 Z" marker-start="none" marker-end="none" fill="url(#LinearGradient_3)"/>
+       <path d="M -426.732,511.597 L -430.315,513.702 L -430.315,517.869 L -426.753,515.807 L -426.732,511.597 Z" fill="#f93512" marker-start="none" marker-end="none"/>
+      </g>
+      <path d="M -415.981,517.923 L -415.981,513.803 L -419.564,511.652 L -419.587,515.849 L -419.564,515.864 L -419.564,515.877 L -415.981,517.923 Z" marker-start="none" marker-end="none" fill="url(#LinearGradient_4)"/>
+      <g id="Group_6">
+       <path d="M -423.147,517.923 L -423.147,517.869 L -423.17,517.881 L -423.17,517.854 L -423.147,517.869 L -423.147,513.746 L -423.176,513.729 L -426.732,511.597 L -426.753,515.807 L -426.732,515.82 L -423.147,517.923 Z" marker-start="none" marker-end="none" fill="url(#LinearGradient_5)"/>
+       <path d="M -423.147,517.869 L -423.17,517.854 L -423.17,517.881 L -423.147,517.869 Z" marker-start="none" marker-end="none" fill="url(#LinearGradient_6)"/>
+       <path d="M -423.176,513.729 L -423.147,513.713 L -423.147,513.746" fill="url(#LinearGradient_7)"/>
+       <path d="M -419.564,511.652 L -423.109,513.736 L -423.147,513.757 L -423.147,517.923 L -419.587,515.864 L -419.587,515.849 L -419.564,511.652 Z" fill="#f93512" marker-start="none" marker-end="none"/>
+       <path d="M -423.109,513.736 L -423.147,513.713" fill="url(#LinearGradient_8)"/>
+      </g>
+     </g>
+    </g>
+   </g>
+  </g>
+ </g>
+ <g id="Layer_1" transform="scale(1 -1)"/>
+</svg>

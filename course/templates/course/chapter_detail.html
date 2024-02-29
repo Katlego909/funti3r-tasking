@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}{{ chapter.title }}{% endblock title %}
+{% block content %}
+<div class="main-container">
+
+    <style>
+
+        .chapter-grid {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 50px;
+        }
+
+        .grid-item:last-child {
+            position: absolute;
+            right: 30px;
+            width: 20%;
+            background-color: #fff;
+            padding: 20px;
+            border: solid 0.2px #ccc;
+            border-radius: 5px;
+        }
+
+        .chapter-title {
+            margin-bottom: 15px;
+        }
+        
+        .chapter-content {
+            margin-bottom: 15px;
+        }
+
+        .chapter-resource {
+            margin-top: 15px;
+        }
+
+        @media screen and (max-width: 768px) {
+
+            .chapter-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .grid-item:last-child {
+                position: relative;
+                margin-left: 30px;
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+    <div class="chapter-grid">
+
+        <div class="grid-item">
+            <p class="chapter-content">{{ chapter.lesson }}</p>
+            <h1 class="chapter-title">Chapter {{ chapter.order }}: {{ chapter.title }}</h1>
+            <p class="chapter-content">{{ chapter.content|safe }}</p>
+        </div>
+
+        <div class="grid-item">
+            {% if resources %}
+                <h3>Resources:</h3>
+                <ul>
+                    {% for resource in resources %}
+                        <li class="chapter-resource"><a href="{{ resource.file.url }}">{{ resource.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+
+    </div>
+
+    
+    
+    
+</div>
+{% endblock content %}

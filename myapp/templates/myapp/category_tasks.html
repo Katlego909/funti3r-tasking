@@ -1,0 +1,451 @@
+{% extends "myapp/nav-footer.html" %}
+{% load static %}
+{% block title %}Search by Category | {% endblock title %}
+{% block content %}
+
+<style>
+
+    body {
+        padding-top: 80px;
+    }
+
+    /* Utility */
+
+    .container {
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    .section-heading {
+        font-size: 32px;
+        margin: 45px 0;
+    }
+
+    .section-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .task-notification {
+        color: red;
+        font-weight: 600;
+    }
+
+    .buttons {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+    }
+
+    .title {
+        margin-bottom: 30px;
+    }
+
+    /* End Utility */
+
+    /* Navbar */
+
+    .navbar {
+        background: #fff;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 25px;
+        position: fixed;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-brand {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .nav-brand img {
+        width: 150px
+    }
+
+    .nav-brand span {
+        font-size: 24px;
+        font-weight: 900;
+    }
+
+    .nav-items {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 25px;
+    }
+
+    .nav-item {
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.5s ease;
+    }
+
+    .nav-item:hover {
+        color: purple;
+    }
+
+    .btn-login {
+        font-weight: 500;
+        background: #ccc;
+        
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        margin-left: 5px;
+    }
+
+    .btn-signup {
+        font-weight: 500;
+        background: purple;
+        color:#fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+    /* End Navbar */
+
+    /* Hero */
+
+    .heading {
+        font-size: 40px;
+    }
+
+    .main {
+        background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+        padding: 60px;
+    }
+
+    .hero {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 40px;
+        align-items: center;
+    }
+
+    .hero-section-title {
+        font-weight: 500;
+        font-size: 40px;
+    }
+
+    .hero-section-title span {
+        font-weight: 900;
+        color: #420A63;
+        text-decoration: underline;
+    }
+
+    .hero-subtitle {
+        margin-bottom: 10px;
+        
+    }
+
+    .hero-text {
+        font-size: 18px;
+        font-weight: 400;
+        margin: 30px 0;
+    }
+
+    .hero-img {
+        width: 550px;
+    }
+
+    .search-bar {
+        display: block;
+        margin-top: 20px;
+    }
+
+    input[type="text"] {
+        background: #fff;
+        width: 80%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        outline: none;
+    }
+
+    .btn-filter {
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+    .btn-category {
+        font-size: 12px;
+        background: lightblue;
+        border: none;
+        border-radius: 20px;
+        padding: 5px 10px;
+        cursor: pointer;
+        transition: all 0.1s ease;
+        margin-bottom: 10px;
+    }
+
+    .btn-category:hover {
+        background: orangered;
+        color: #fff;
+    }
+
+    .hero-categories {
+        margin-top: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .category-tabs {
+        margin-bottom: 40px;
+    }
+
+    .categories-grid {
+        display:grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        align-items: flex-start;
+    }
+
+    .category-title {
+        font-size: 12px;
+        font-weight: 400;
+    }
+
+    .category-item {
+        background: lightblue;
+        border-radius: 5px;
+        padding: 20px;
+    }
+
+    a {
+        color: black;
+    }
+
+    /* End Hero */
+
+    /* Companies */
+
+    .companies {
+        background: rgb(224, 224, 224);
+        padding: 40px 0;
+    }
+
+    .companies .company-img {
+        width: 80px;
+    }
+
+    .company {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        gap: 30px;
+    }
+
+    .company h4 {
+        font-size: 14px;
+        font-weight: 500;
+        color: rgb(49, 49, 49);
+    }
+
+    /* End Companies */
+
+    /* Category */
+
+    .category-results {
+        margin: 40px 0;
+    }
+
+    .category-title {
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    /* End Category */
+
+    /* CTA */
+
+    .call-to-action {
+        padding: 20px;
+        margin-bottom: 40px;
+        border: solid 0.5px #ccc;
+        border-radius: 5px;
+    }
+
+    /* Mobile */
+
+    @media screen and (max-width: 768px) {
+
+        .container {
+            margin: 20px;
+        }
+
+        .nav-items {
+            display: none;
+        }
+
+        .hero {
+            grid-template-columns: 1fr;
+        }
+
+        .hero-section-title {
+            font-size: 26px;
+        }
+
+        .hero-text {
+            font-size: 14px;
+        }
+
+        .hero-img {
+            display: none;
+        }
+
+        input[type="text"] {
+            width: 100%;
+        }
+
+        .btn-filter {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .hero-categories {
+        display: block;
+        }
+
+        .categories-grid {
+        grid-template-columns: repeat(2, 1fr);
+        }
+
+        .section-heading {
+            font-size: 28px;
+        }
+}
+
+</style>
+
+<div class="main">
+    
+    <!-- Hero -->
+
+    <div class="hero">
+        <div class="hero-section">
+            <h5 class="hero-subtitle">Explore Micro-tasking</h5>
+            <h1 class="hero-section-title">
+                Remote <span>{{ category.name }}</span> Tasks
+            </h1>
+                <p class="hero-text">Find work-from-home and remote {{ category.name }} tasks. Expand your opportunities and finally take the next step into the world of remote work. We have thoroughly checked all online listings to ensure you only browse legitimate, paid, and 100% remote jobs.
+                </p>
+
+                <!-- Search bar -->
+
+                <div class="search-bar">
+                    <!-- <form method="get" action="{% url 'home' %}">
+                        <label for="category">Select a category:</label>
+                        <select name="category" id="category">
+                            <option value="" selected>All Categories</option>
+                            {% for category in categories %}
+                                <option value="{{ category.id }}">{{ category.name }}</option>
+                            {% endfor %}
+                        </select>
+                        <input type="submit" value="Filter">
+                    </form> -->
+                </div>
+
+                <!-- Categories -->
+
+                <div class="hero-categories">
+                 
+                    <div class="categories">
+                            {% for category in categories %}
+                            <a href="{% url 'category_tasks' category.id %}">
+                                <button class="btn-category">
+                                    <i class="fa fa-search"></i> {{ category.name }}
+                                </button>
+                            </a>
+                            {% endfor %}
+                    </div>
+                </div>
+        </div>
+
+        <!-- Hero Image -->
+
+        <!-- <div class="hero-section">
+            <img src="{% static 'assets/images/hero-img.png' %}" class="hero-img">
+        </div> -->
+
+        <!-- End Hero Image -->
+
+    </div>
+    <!-- End Hero -->
+</div>
+
+<div class="category-results">
+
+<div class="container">
+    <h2 class="category-title">We've found {{ category.tasks.count }} items </h2>
+    <h1 class="title">{{ category.name }} Tasks</h1>
+    
+    <div class="card-grid">
+        {% for task in tasks %}
+           <div class="card-item">
+            {% if task.image %}
+            <img src="{{ task.image.url }}" class="image" alt="Task Image">
+            {% endif %}
+                        <div class="card-body">
+                            <div class="info">
+                                <h2 class="card-title">{{ task.title }}</h2>
+                                <h2 class="card-amount">{{ task.category }}</h2>
+                            </div>
+                            <p class="card-description"> {{ task.short_description|truncatewords:10 }} </p>      
+                            
+                            <!-- {% if user.is_authenticated %}
+                                <form action="{% url 'toggle_favorite' task.id %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="submit" class="favorite" value="{% if task in user.favorite_tasks.all %} Remove from Favorites{% else %} Add to Favorites {% endif %}">
+                                </form>
+                            {% else %}
+                                <p>Login to add to Favorites.</p>
+                            {% endif %}  -->
+
+                        </div>
+
+                        <div class="card-footer">
+                            {% if request.user == task.created_by %}
+                                <a href="{% url 'edit_task' task.id %}" class="edit">Edit</a>
+                                <a href="{% url 'delete_task' task.id %}" class="delete">Delete</a>
+                            {% else %}
+                                <a href="{% url 'task_detail' task.id %}" class="view-more">View More</a>
+                            {% endif %}
+    
+                            <div class="company-name"> 
+                                {% if task.company_logo %}
+                                <img src="{{ task.company_logo.url }}" class="company_logo">
+                                {% endif %}
+                            </div>
+    
+                        </div>
+
+                    </div>
+        {% empty %}
+        <p class="task-notification">Task not found! Search again.</p>
+        {% endfor %}
+    </div>
+
+ {% comment %} End Tasks {% endcomment %}
+
+</div>
+</div>
+</div>
+{% endblock content %}

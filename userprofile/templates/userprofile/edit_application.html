@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+
+    .edit-title {
+        margin-bottom: 25px;
+    }
+
+    form {
+        display: block;
+    }
+
+    input, 
+    textarea {
+        background: #fff;
+        padding: 10px 5px;
+        width: 100%;
+        margin-bottom: 10px;
+        border: solid 1px #ccc;
+        border-radius: 5px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .btn-submit {
+        width: 100%;
+        font-weight: 700;
+        border: none;
+        border-radius: 5px;
+        background: purple;
+        color: #fff;
+        padding: 15px;
+        cursor: pointer;
+    }
+
+</style>
+
+<div class="main-container">
+
+    <h1 class="edit-title">Edit Application for {{ application.task.title }}</h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <button type="submit" class="btn-submit">Save Changes</button>
+    </form>
+
+</div>
+{% endblock content %}

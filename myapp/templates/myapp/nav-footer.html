@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/icons/favicon.svg' %}">
+    
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/card.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/process.css' %}">
+
+    <title>{% block title %}{% endblock title %} Funti3r Micro-tasking</title>
+
+    <style>
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            padding-top: 80px;
+        }
+
+        /* Utility */
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-heading {
+            font-size: 32px;
+            margin: 45px 0;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .task-notification {
+            color: red;
+            font-weight: 600;
+        }
+
+        .buttons {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        hr {
+            border: solid #ccc 0.2px;
+        }
+
+
+        /* End Utility */
+
+        /* Navbar */
+
+        .navbar {
+            background: #fff;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 25px;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .nav-brand img {
+            width: 150px
+        }
+
+        .nav-brand span {
+            font-size: 24px;
+            font-weight: 900;
+        }
+
+        .nav-items {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .nav-item {
+            font-weight: bolder;
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+
+        .nav-item:hover {
+            color: #420A63;
+        }
+
+        .btn-login {
+            font-weight: 500;
+            background: #f1f1f1;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-login:hover {
+            color: #fff;
+            background: #420A63;
+        }
+
+        .btn-signup {
+            font-weight: 500;
+            background: #420A63;
+            color:#fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-signup:hover {
+            color: #420A63;
+            background: #f1f1f1;
+        }
+
+        /* End Navbar */
+
+        /* Hero */
+
+        .heading {
+            font-size: 40px;
+        }
+
+        .main {
+            background: linear-gradient(90deg, #5fb7ff 0%, #e3ffe7 100%);
+            padding: 60px 0;
+        }
+
+        .hero {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-section-title {
+            color: #420A63;
+            font-size: 48px;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            margin-bottom: 15px;
+        }
+
+        .hero-text {
+            font-size: 18px;
+            font-weight: 400;
+            margin-top: 20px;
+        }
+
+        .hero-img {
+            width: 550px;
+            border-radius: 10px;
+        }
+
+        .academy-img {
+            width: 550px;
+        }
+
+        .search-bar {
+            display: block;
+            margin-top: 20px;
+        }
+
+        input[type="text"] {
+            background: #fff;
+            width: 80%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        .btn-filter {
+            background: #420A63;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .btn-filter i {
+            color: #fff;
+        }
+
+        .btn-category {
+            font-size: 10px;
+            background: lightblue;
+            border: none;
+            border-radius: 20px;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            margin-bottom: 5px;
+        }
+
+        .btn-category:hover {
+            background: orangered;
+            color: #fff;
+        }
+
+        .hero-categories {
+            margin-top: 15px;
+            display: flex;
+            flex-basis: auto;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-tabs {
+            margin-bottom: 40px;
+        }
+
+        .categories-grid {
+            display:grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            align-items: flex-start;
+        }
+
+        .category-title {
+            font-size: 12px;
+        }
+
+        .category-item {
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            gap: 10px;
+            background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%); 
+            padding: 20px;
+            {% comment %} border: solid 0.5px #ccc; {% endcomment %}
+            border-radius: 5px;
+        }
+
+        .category-item h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #420A63;
+        }
+
+        .category-item p {
+            font-size: 14px;
+        }
+
+        .category-icon {
+            width: 50px;
+        }
+
+        a {
+            color: black;
+        }
+
+        /* End Hero */
+
+        /* Companies */
+
+        .companies {
+            padding: 40px 0;
+            border-bottom: solid 0.2px #ccc;
+        }
+
+        .companies .trusted-by {
+            color: #333333;
+        }
+        .companies .company-img {
+            width: 85px;
+        }
+
+        .company {
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            gap: 30px;
+        }
+
+        .company h4 {
+            font-size: 14px;
+            font-weight: 500;
+            color: lightblue;
+        }
+
+        /* End Companies */
+
+        /* Category */
+
+        /* End Category */
+
+        /* CTA */
+
+        .cta {
+            margin-top: 80px;
+        }
+
+        .call-to-action {
+            background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%); 
+            padding: 60px;
+            margin-bottom: 40px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .call-to-action h1 {
+            font-size: 36px;
+            color: #420A63;
+            margin-bottom: 20px;
+        }
+
+        .call-to-action p {
+            font-size: 18px;
+            font-weight: 300;
+        }
+
+        .btn-cta {
+            font-weight: 500;
+            background: #420A63;
+            color: #fff;
+            margin-top: 20px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        /* Enterprise */
+
+        .enterprise-cta {
+            margin: 100px 0;
+        }
+
+        .enterprise-details {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .enterprise-info h1 {
+            color: #420A63;
+            font-size: 36px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .enterprise-info p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .enterprise-subtitle {
+            font-size: 22px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .enterprise-items li {
+            font-weight: 300;
+        }
+        .enterprise-item i {
+            font-size: 12px;
+            font-weight: 900;
+            padding: 5px;
+            border-radius: 50%;
+            background: lightgreen;
+            color: green;
+            /* TRBL */
+            margin: 5px 5px 0 0 ;
+        }
+
+        .btn-cta {
+            font-weight: 500;
+            background: #420A63;
+            color: #fff;
+            margin-top: 20px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .enterprise-img img {
+            border-radius: 10px;
+        }
+
+        /* End Enterprise */
+
+        /* Process */
+
+        .process-cta {
+            margin: 100px 0;
+        }
+
+        .process-details {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .process-info h1 {
+            color: #420A63;
+            font-size: 36px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .process-info p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .process-subtitle {
+            font-size: 22px;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .process-items li {
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        .process-item i {
+            font-size: 14px;
+            font-weight: 700;
+            color: green;
+            background: lightgreen;
+            border-radius: 100%;
+            padding: 5px 6px;
+            /* TRBL */
+            margin-right: 10px;
+        }
+
+        .btn-cta {
+            font-weight: 500;
+            background: #420A63;
+            color: #fff;
+            margin-top: 20px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .process-img img {
+            border-radius: 10px;
+            margin-right: 50px;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        /* End Process */
+
+        /* Academy */
+
+        .academy-cta {
+            margin: 100px 0;
+        }
+
+        .academy {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            background: #420A63;
+            color: #fff;
+            padding: 40px;
+            margin-bottom: 40px;
+            border-radius: 5px;
+        }
+
+        .academy h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .academy p {
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+
+        .academy-items li {
+            font-size: 16px;
+            font-weight: 300;
+        }
+
+        .academy-item i {
+            font-size: 14px;
+            font-weight: 600;
+            color: green;
+            background: lightgreen;
+            border-radius: 100%;
+            padding: 5px 6px;
+            /* TRBL */
+            margin-right: 10px;
+        }
+
+        .academy-img {
+            width: 550px;
+        }
+
+        .academy img {
+            border-radius: 5px;
+        }
+
+        .btn-academy {
+            font-weight: bold;
+            background:#fff;
+            color: #420A63;
+            margin-top: 25px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* End Academy */
+
+        /* Footer */
+
+        #footer {
+            color: #fff;
+            background: #420A63;
+            padding: 80px 0;
+        }
+
+        .footer-info {
+            display: grid;
+            grid-template-columns: 3fr repeat(3, 1fr);
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .footer-brand img {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+
+        .footer-brand p {
+            font-size: 14px;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .footer-brand p:last-child {
+            font-weight: 500;
+            color: #ccc;
+        }
+    
+        .footer-items li {
+            color: #fff;
+            font-size: 14px;
+            font-weight: 400;
+            margin: 20px 0;
+        }
+
+        .footer-items p {
+            font-weight: 500;
+            color: #ccc;
+        }
+
+        .footer-items li a {
+            font-weight: 300;
+            color: #fff;
+        }
+
+        .footer-link i {
+            margin-right: 10px;
+        }
+
+        .copyright {
+            color: #ccc;
+            background: rgb(32, 32, 32);
+            padding: 20px;
+        }
+
+        .copyright a {
+            font-weight: 600;
+            color: #fff;
+        }
+
+        /* End Footer */
+
+        /* Mobile */
+
+        @media screen and (max-width: 768px) {
+
+            .container {
+                margin: 20px;
+            }
+
+            .main {
+                padding: 40px 20px;
+            }
+
+            .nav-items {
+                display: none;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                margin: 0;
+            }
+
+            .hero-section-title {
+                font-size: 36px;
+            }
+
+            .hero-text {
+                font-size: 16px;
+            }
+
+            .hero-img {
+                display: none;
+            }
+
+            input[type="text"] {
+                width: 100%;
+            }
+
+            .btn-filter {
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            .hero-categories {
+            display: block;
+            }
+
+            .categories-grid {
+            grid-template-columns: 1fr;
+            }
+
+            .category-title {
+                margin-bottom: 10px;
+            }
+
+            .section-heading {
+                font-size: 28px;
+            }
+
+            .academy {
+                display: block;
+            }
+
+            .academy-img {
+                width: 100%;
+                margin-top: 20px;
+            }
+
+            #footer {
+                padding: 25px 0;
+            }
+
+            .footer-info {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            align-items: center;
+            justify-content: center;
+            }
+
+            .copyright {
+                text-align: center;
+            }
+
+   }
+
+    </style>
+
+</head>
+<body>
+
+   <!-- Navigation  -->
+
+      <!-- Navbar -->
+
+      <nav>
+        <div class="navbar" id="navbar">
+
+            <div class="nav-brand">
+                <a href="/">
+                    <img src="{% static 'assets/images/logo.svg' %}" alt=""> 
+                    <!-- <span>Funti3r</span> -->
+                </a>
+            </div>
+
+            <ul class="nav-items">
+                <li class="nav-item"><a href="#category-tabs">Categories</a></li>
+                <li class="nav-item"><a href="#how-it-works">How it works</a></li>
+                <li class="nav-item"><a href="{% url 'create_ticket' %}">Support</a></li>
+            </ul>
+    
+            <div class="buttons">
+                <a href="{% url 'login' %}" >
+                    <button class="btn-login" >Log in</button>
+                </a>
+                <a href="{% url 'signup' %}" >
+                    <button class="btn-signup" >Sign Up</button>
+                </a>
+    
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- End Navbar -->
+
+    {% block content %}
+    {% endblock content %}
+
+   <!-- Footer -->
+
+   <section id="footer">
+    <div class="container">
+        <div class="footer">
+            
+            <div class="footer-info">
+                <div class="footer-brand">
+                    <a href="/">
+                        <img src="{% static 'assets/images/logowht.svg' %}" alt=""> 
+                        <!-- <span>Funti3r</span> -->
+                    </a>
+                    <p>Unlock Business Efficiency with Our Distributed Workforce Platform - Our innovative micro-tasking application is designed to unlock unprecedented efficiency.</p>
+                    <p><i class="fa fa-location"></i><a href="https://www.bing.com/maps?osid=ee7d7c57-88ea-4c98-b853-1ce4b1b2097c&cp=-34.014428~18.477867&lvl=16&pi=0&v=2&sV=2&form=S00027" target="_blank" style="color: #fff"> 9 Portswood Road, V&A, Cape Town</a></p>
+                </div> 
+                
+                <div class="footer-items">
+                    <p>Important Links</p>
+                    <ul>
+                        <li class="footer-link"><a href="#">Home</a></li>
+                        <li class="footer-link"><a href="">Categories</a></li>
+                        <li class="footer-link"><a href="">How it works</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-items">
+                    <p>Important Links</p>
+                    <ul>
+                        <li class="footer-link"><a href="">Privacy Policy</a></li>
+                        <li class="footer-link"><a href="">Terms of use</a></li>
+                        <li class="footer-link"><a href="{% url 'create_ticket' %}">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-items">
+                    <p>Social Links</p>
+                    <ul>
+                        <li class="footer-link"><a href=""><i class="fa-brands fa-instagram"></i> Instagram</a></li>
+                        <li class="footer-link"><a href="https://www.linkedin.com/company/funti3r/" target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a></li>
+                        <li class="footer-link"><a href=""><i class="fa-brands fa-twitter"></i> Twitter</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+    <div class="copyright">
+        <div class="container">
+            <p>&copy All rights reserved | <a href="/">Funti3r</a></p>
+        </div>
+    </div>
+
+    {% comment %} Chatbot {% endcomment %}
+
+    <script src="https://cdn.botpress.cloud/webchat/v1/inject.js"></script>
+    <script>
+      window.botpressWebChat.init({
+          "composerPlaceholder": "Chat with Funti3r",
+          "botConversationDescription": "A helpful bot for Funti3r Micro-tasking and Research",
+          "botId": "7d436e99-647d-472c-add0-e20ac38e443c",
+          "hostUrl": "https://cdn.botpress.cloud/webchat/v1",
+          "messagingUrl": "https://messaging.botpress.cloud",
+          "clientId": "7d436e99-647d-472c-add0-e20ac38e443c",
+          "webhookId": "39b777b3-758b-4558-b267-edec89939354",
+          "lazySocket": true,
+          "themeName": "prism",
+          "botName": "Funti3r",
+          "stylesheet": "https://webchat-styler-css.botpress.app/prod/d0e1281b-1505-4184-8e48-c42bccb4263b/v49628/style.css",
+          "frontendVersion": "v1",
+          "useSessionStorage": true,
+          "enableConversationDeletion": true,
+          "theme": "prism",
+          "themeColor": "#2563eb"
+      });
+    </script>
+ 
+</body>
+</html>

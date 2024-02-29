@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/icons/favicon.svg' %}">
+
+    <style>
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center; 
+            height: 100vh;
+            overflow: hidden;
+            font-family: "Roboto", Arial, sans-serif;
+            background: #f4f2ee;
+        }
+
+        .container {
+            width: 300px;
+            padding: 20px;
+            text-align: center;
+            border: solid 1px #ccc;
+            border-radius: 5px;
+            background: #fff;
+        }
+
+        .logo {
+            width: 200px;
+            margin-top: 20px;
+        }
+
+        form {
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin: 5px 0;
+        } 
+
+        input {
+            padding: 10px 5px;
+            width: 95%;
+        }
+
+        select {
+            margin-bottom: 20px;
+            padding: 10px 5px;
+            width: 100%;
+        }
+
+        button {
+            width: 100%;
+            font-weight: 700;
+            border: none;
+            border-radius: 5px;
+            background: purple;
+            color: #fff;
+            padding: 15px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: purple;
+            color: #ccc;
+        }
+
+        .link {
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .helptext, li {
+            display: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        ul {
+            text-align: left;
+            padding-inline-start: 0px;
+        }
+
+        li {
+            font-size: 14px;
+            color: red;
+            list-style: none;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        {% comment %} <img src="{% static 'assets/images/logo.svg'  %}" class="logo" alt="logo"> {% endcomment %}
+        <h2>Sign Up</h2>
+        <form method="POST" action=".">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+  
+                <label for="account_type">Account Type:</label>
+                <select name="account_type">
+                    <option value="agent" selected>Agent</option>
+                    <option value="company">Company</option>
+                </select>
+
+
+            <button type="submit" class="btn">Sign Up</button>
+        </form>
+        <p class="link">Already have an account? <a href="{% url 'login' %}">Login</a> </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,143 @@
+.heading {
+    font-size: 24pxs;
+    margin-bottom: 20px;
+}
+
+.image {
+    display: block;
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: center; 
+}
+
+.card-grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card-item {
+    overflow: hidden;
+    border: solid 0.5px #ccc;
+    border-radius: 5px;
+    background: #fff;
+}
+
+.card-title {
+    font-size: 18px;
+}
+
+.card-amount {
+    background: lightblue;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 400;
+    padding: 5px 10px;
+}
+
+.card-description {
+    font-size: 14px;
+    margin: 15px auto;
+    color: #646464;
+}
+
+.card-body {
+    margin-top: 20px;
+    padding: 0 20px;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.info .card-amount {
+    color: #420A63;
+}
+
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding: 0 20px 20px 20px;
+}
+
+.edit {
+    font-size: 14px;
+    color: purple;
+    cursor: pointer;
+    transition: all .2s ease;
+    }
+
+.delete {
+    font-size: 14px;
+    color: red;
+    cursor: pointer;
+    transition: all .2s ease;
+    }
+
+.view-more {
+    font-size: 14px;
+    font-weight: 400;
+    color: purple;
+    cursor: pointer;
+    transition: all .2s ease;
+    }
+
+.view-more:hover {
+    color: purple;
+}
+
+.search-filter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 10px;
+    border:solid 1px #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+}
+
+input {
+    border: none;
+    border-radius: 5px;
+    padding: 6px 5px;
+    outline: none;
+    width: 100%;
+    background: transparent;
+}
+
+.company_logo {
+    width: 80px;
+}
+
+.info a {
+    color: #000;
+}
+
+.info a:hover {
+    color: #420A63;
+}
+
+.favorite {
+    text-align: left;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px)  {
+
+}
+

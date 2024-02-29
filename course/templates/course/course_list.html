@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Course List{% endblock title %}
+{% block content %}
+
+<style>
+
+    a {
+        color: #000;
+        text-decoration: none;
+    }
+
+    .course-subtitle {
+        margin-bottom: 40px;
+    }
+
+    .banner-container {
+        margin-bottom: 80px;
+    }
+
+    .grid-items {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .grid-card {
+        background: #fff;
+        border: solid 0.2px #ccc;
+        border-radius: 5px;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .category-name {
+        margin-top: 30px;
+    }
+
+    .category-description {
+        margin: 5px 0 25px 0;
+    }
+
+    .card-info {
+        padding: 20px;
+    }
+
+    .card-info h3 {
+        margin-bottom: 15px;
+    }
+
+    .course-items {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .course-image {
+        width: 100%;
+        object-fit: cover;
+        aspect-ratio: 16/9;
+        object-position: center;
+    }
+
+    .course-level {
+        font-size: 12px;
+        color: rgb(65, 65, 65);
+        margin-bottom: 15px;
+        padding: 5px 10px;
+        border: solid 0.5px #ccc;
+        border-radius: 20px;
+    }
+
+    .course-item {
+        font-size: 12px;
+        color: rgb(65, 65, 65);
+        margin-bottom: 15px;
+    }
+
+    .course-description {
+        font-size: 14px;
+        color: rgb(65, 65, 65);
+    }
+
+    .icon {
+        margin-right: 10px;
+    }
+
+    .btn-enroll {
+        width: 100%;
+        padding: 10px 20px;
+        color: #fff;
+        background: #420A63;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .btn-enroll:hover {
+        color: #fff;
+        background: #6a0f9e;
+    }
+
+</style>
+
+<div class="main-container">
+
+    <h1 class="course-heading">Courses</h1>
+    <p class="course-subtitle">Pick the one that you feel fits your current needs best. All courses are free.</p>
+
+    <div class="banner-container">
+        <div class="banner">
+            <div class="banner-details">
+                <div class="banner-text">
+                    <h1>Unlock the Fun: Dive into Anything, Anytime!</h1>
+                    <p>Ever felt like learning something new was as exciting as a rollercoaster ride? Well, buckle up because our platform is here to turn your learning journey into a thrilling adventure! With us, there's no need to stick to a rigid schedule – you're the captain of your learning ship! </p>
+                    {% comment %} <a href="{% url 'academy' %}">
+                        <button class="btn btn-primary">Funtier Academy</button>
+                    </a> {% endcomment %}
+                </div>
+                <div class="banner-img">
+                    <img src="{% static 'assets/images/books.png' %}">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% for category, courses in courses_by_category.items %}
+        {% if courses %}
+        
+            <h2 class="category-name">{{ category.name }}</h2>
+            <p class="category-description">{{ category.description }}</p>
+
+            <div class="grid-items">
+                {% for course in courses %}
+                    <a href="{% url 'course_detail' course.id %}" class="grid-card">
+                        {% if course.image %}
+                <img src="{{ course.image.url }}" class="course-image" alt="Course Image">
+                {% endif %}
+                    <div class="card-info">
+                        <h3>{{ course.title }}</h3>
+
+                        <p class="course-item"><i class="fa fa-tag icon"></i> {{ course.category }}</p>
+
+                        <div class="course-items">
+                            <p class="course-level">{{ course.experience_level }}</p>
+                            <p class="course-item"><i class="fa fa-clock icon"></i> {{ course.duration }}</p>
+                        </div>
+
+                        <form method="post" action="{% url 'enroll_course' course.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn-enroll">Start Course</button>
+                        </form>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endfor %}
+
+</div>
+{% endblock content %}

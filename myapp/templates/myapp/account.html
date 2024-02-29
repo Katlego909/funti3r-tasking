@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .username {
+        font-size: 16px;
+        font-weight: 400;
+        margin-top: 20px;
+
+    }
+</style>
+
+<div class="main-container">
+    <h1>My Account</h1>
+    <h3 class="username">Signed in as  <strong>{{ request.user }}</strong></h3>
+</div>
+{% endblock content %}

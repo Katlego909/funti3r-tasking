@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Academy{% endblock title %}
+{% block content %}
+
+<main class="main-container">
+    <div class="content">
+<div class="main-title">
+    <h1 style="margin-bottom: 30px">Academy</h1>
+</div>
+        <div class="task-items">
+            {% for task in tasks %}
+                <div class="task-card">
+                    
+                    <h2>{{ task.title }}</h2>
+                    <p>{{ task.requester }}</p>
+                    <p>{{ task.short_description }}</p>
+                    <p>{{ task.description }}</p>
+                    <p>{{ task.created_on }}</p>
+
+                    <a href="{% url 'task_detail' task.slug %}">
+                        <button>Read More</button>
+                    </a>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</main>
+{% endblock content %}

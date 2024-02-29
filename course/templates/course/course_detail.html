@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+{% block title %}Course Detail: {{ course.title }}{% endblock title %}
+{% block content %}
+<div class="main-container">
+
+    <style>
+
+        .course-image {
+            width: 100%;
+            object-fit: cover;
+            height: 325px;
+            border-radius: 8px;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: 3fr 1fr;
+            gap: 50px;
+        }
+
+        .grid-item:last-child {
+            position: fixed;
+            right: 30px;
+            width: 20%;
+            background-color: #fff;
+            padding: 20px;
+            border: solid 0.2px #ccc;
+            border-radius: 5px;
+        }
+
+        .course-category {
+            margin-bottom: 15px;
+        }
+
+        .course-title {
+            margin-bottom: 35px;
+        }
+
+        .course-description {
+            font-size: 14px;
+            margin: 20px 0;
+        }
+
+        .course-content {
+            margin-bottom: 15px;
+        }
+        
+        .course-price {
+            margin-bottom: 15px;
+        }
+
+        .lesson {
+            font-size: 14px;
+            transition: all 0.8s ease-in-out;
+        }
+
+        .lesson a {
+            color: #000;
+        }
+
+        .lesson a:hover {
+            color: orangered;
+        }
+
+        .icon {
+            margin-right: 10px;
+        }
+
+        .lesson-list {
+            background: #fff;
+            padding: 20px;
+            border: solid 0.2px #ccc;
+            border-radius: 5px;
+        }
+
+        .btn-enroll {
+            width: 100%;
+            padding: 10px 20px;
+            color: #fff;
+            background: #420A63;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-enroll:hover {
+            color: #fff;
+            background: #6a0f9e;
+        }
+
+        .btn-cancel {
+            width: 100%;
+            margin-bottom: 15px;
+            padding: 10px 20px;
+            border: solid 0.5px #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .requirements {
+            margin: 20px 0;
+        }
+
+        .requirement-item {
+            font-size: 14px;
+            color: gray;
+            margin-bottom: 5px;
+        }
+
+        .enroll-message {
+            font-size: 12px;
+            font-weight: bold;
+            color: orangered;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: solid 0.2px #ccc;
+            border-radius: 5px;
+        }
+
+        .item {
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .message {
+            font-size: 14px;
+            color: green;
+            text-align: center;
+        }
+
+        @media screen and (max-width: 768px) {
+
+            .course-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-item:last-child {
+                position: relative;
+                margin-left: 30px;
+                width: 100%;
+            }
+
+        }
+    
+    </style>
+
+    <div class="course-grid">
+
+        <div class="grid-item">
+            <p class="course-category">{{ course.category }}</p>
+            {% comment %} <p class="course-instructor">Created by: {{ course.instructor }}</p> {% endcomment %}
+        
+            <h1 class="course-title">Course: {{ course.title }}</h1>
+        
+            {% if course.image %}
+                <img src="{{ course.image.url }}" class="course-image" alt="Course Image">
+            {% endif %}
+        
+            <p class="course-description">{{ course.description|safe }}</p>
+        
+    {% if lessons %}
+
+    <h3 class="course-content">Course Content:</h3>
+    <ul class="lesson-list">
+        {% for lesson in lessons %}
+            <li class="lesson"><a href="{% url 'lesson_detail' course.id lesson.id %}"><i class="fa fa-book icon"></i> Lesson {{ lesson.order}}: {{ lesson.title }}</a></li>
+            
+            {% endfor %}
+    </ul>
+
+    {% endif %}
+
+    <h3 class="requirements">Requirements</h3>
+
+        <ul class="requirement-list">
+            <li class="requirement-item"><i class="fa fa-check icon"></i> No experience needed - We'll teach you everything you need to know</li>
+            <li class="requirement-item"><i class="fa fa-check icon"></i> A Mac or PC computer with access to the internet</li>
+            <li class="requirement-item"><i class="fa fa-check icon"></i> No paid software required</li>
+        </ul>
+
+    </div>
+
+        <div class="grid-item">
+
+            <p class="item"><i class="fa fa-briefcase icon"></i> {{ course.experience_level }}</p>
+            <p class="item"><i class="fa fa-clock icon"></i> {{ course.duration }}</p>
+            <p class="item"><i class="fa fa-book icon"></i> {{ lesson_count }} Lessons</p>
+
+            {% if enrolled %}
+                <form method="post" action="{% url 'unenroll_course' course.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-cancel"><i class="fa fa-cancel icon"></i> Cancel Course</button>
+                </form>
+                <p class="message">You have successfully enrolled in this course.</p>
+            {% else %}
+            <p class="enroll-message"><i class="fa fa-info-circle icon"></i> Please enroll to view lessons.</p>
+                <form method="post" action="{% url 'enroll_course' course.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-enroll">Enroll Now</button>
+                </form>
+            {% endif %}
+        </div>
+
+    </div>
+
+</div>
+{% endblock content %}
