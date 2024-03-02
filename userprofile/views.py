@@ -25,14 +25,20 @@ def user_profile_view(request):
 @login_required
 def edit_profile(request):
     user_profile = request.user.userprofile
+
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
         if form.has_changed() and form.is_valid():
             form.save()
-            
+
             # Update the username
-            request.user.username = form.cleaned_data['username']
-            request.user.save()
+            new_username = form.cleaned_data['username']
+
+            # Check if the username has changed
+            if request.user.username != new_username:
+                # Update the username using Django's authentication system
+                request.user.username = new_username
+                request.user.save()
 
             return redirect('profile')  # Redirect to the user's profile page
     else:

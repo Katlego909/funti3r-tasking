@@ -55,11 +55,7 @@ LOGGING = {
     },
 }
 
-<<<<<<< HEAD
 ALLOWED_HOSTS = ['*']
-=======
-ALLOWED_HOSTS = ['funti3r.pythonanywhere.com']
->>>>>>> a3e48abd2fe1987aa29e754915b3c0893bb71fe7
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'dashboard'
