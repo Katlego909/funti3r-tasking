@@ -75,9 +75,6 @@ INSTALLED_APPS = [
     'userprofile',
     'notifications',
     'course',
-
-    'ckeditor',
-    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
