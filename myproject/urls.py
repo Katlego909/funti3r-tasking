@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path  # Import 're_path' function
 from django.contrib.auth import views
 
 from django.conf import settings
@@ -11,7 +11,6 @@ urlpatterns = [
     path('', include("course.urls")),
     path('', include("userprofile.urls")),
     path('', include("notifications.urls")),
-    path('ckeditor/', include('ckeditor_uploader.urls')),
     path('logout/', views.LogoutView.as_view(), name="logout"),
     path('login/', views.LoginView.as_view(template_name="myapp/login.html"), name="login"),
     path('admin/', admin.site.urls),
