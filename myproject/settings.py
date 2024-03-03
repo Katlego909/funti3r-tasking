@@ -16,7 +16,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -25,8 +24,6 @@ SECRET_KEY = 'django-insecure-2j$u(xg@eje5sx9n23s31u(mtxn2k07+fs+iw*baecl&m)l&gq
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-
 
 # Configure email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

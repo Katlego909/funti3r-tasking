@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from ckeditor.fields import RichTextField
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -32,7 +31,7 @@ class Course(models.Model):
     title = models.CharField(max_length=200)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     instructor = models.ForeignKey(User, on_delete=models.CASCADE)
-    description = RichTextField()
+    description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(upload_to='course_images/', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -49,7 +48,7 @@ class Lesson(models.Model):
     title = models.CharField(max_length=200)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='lessons')
     order = models.PositiveIntegerField()
-    content = RichTextField()
+    content = models.TextField()
     image = models.ImageField(upload_to='lesson_images/', null=True, blank=True)
 
     def __str__(self):
@@ -62,7 +61,7 @@ class Chapter(models.Model):
     lesson = models.ForeignKey(Lesson, related_name='chapters', on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     order = models.PositiveIntegerField()
-    content = RichTextField()
+    content = models.TextField()
 
     def __str__(self):
         return self.title
