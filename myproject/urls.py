@@ -11,6 +11,7 @@ urlpatterns = [
     path('', include("course.urls")),
     path('', include("userprofile.urls")),
     path('', include("notifications.urls")),
+    path('django-check-seo/', include("django_check_seo.urls")),
     path('logout/', views.LogoutView.as_view(), name="logout"),
     path('login/', views.LoginView.as_view(template_name="myapp/login.html"), name="login"),
     path('admin/', admin.site.urls),

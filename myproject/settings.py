@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-2j$u(xg@eje5sx9n23s31u(mtxn2k07+fs+iw*baecl&m)l&gq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # Configure email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -72,7 +72,17 @@ INSTALLED_APPS = [
     'userprofile',
     'notifications',
     'course',
+    'login_history',
+    'django.contrib.sites',
+
+    'cms',
+    'menus',
+    'treebeard',
+
+    'django_check_seo',
 ]
+
+SITE_ID = 1
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -82,6 +92,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_auto_logout.middleware.auto_logout',
 ]
 
 ROOT_URLCONF = 'myproject.urls'
@@ -98,6 +109,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'notifications.context_processors.notifications',
+                'django_auto_logout.context_processors.auto_logout_client',
             ],
         },
     },
@@ -167,3 +179,9 @@ CKEDITOR_IMAGE_BACKEND = 'pillow'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Django session timeout
+AUTO_LOGOUT = {'IDLE_TIME': 20, 'REDIRECT_TO_LOGIN_IMMEDIATELY': True, 
+               
+               'MESSAGE': 'The session has expired. Please login again to continue.',
+}

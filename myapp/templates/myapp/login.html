@@ -91,6 +91,13 @@
     <div class="container">
         <img src="{% static 'assets/images/logo.svg'  %}" class="logo" alt="logo">
         <h2>Log in</h2>
+
+        {% for message in messages %}
+        <div class="message  {{ message.tags }}" style="color:green;font-size:12">
+            {{ message }}
+        </div>
+        {% endfor %}
+
         <form method="POST" action=".">
             {% csrf_token %}
             {{ form.as_p }}

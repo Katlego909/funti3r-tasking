@@ -10,6 +10,10 @@
     <h1>Dashboard</h1>
 </div>
 
+<div class="welcome-title" style=" ">
+    <p class="greeting">Welcome, {{ request.user }}</p>
+</div>
+
 <div class="main-cards">
 
     <div class="card">
@@ -94,6 +98,9 @@
 </div> {% endcomment %}
 
 </div>
+
+{{ redirect_to_login_immediately }} 
+
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
