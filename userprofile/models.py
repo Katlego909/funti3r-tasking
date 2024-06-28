@@ -11,7 +11,7 @@ class Userprofile(models.Model):
     cell_number = models.CharField(max_length=20, blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
     industry = models.CharField(max_length=255, blank=True, null=True)
-    earnings = models.DecimalField(default=0, max_digits=10, decimal_places=2)  # Add the earnings field
+    earnings = models.DecimalField(default=0, max_digits=10, decimal_places=2)
 
     def __str__(self):
         return f'{self.user} - {self.email}'
@@ -31,4 +31,3 @@ class ConversationMessage(models.Model):
 
     class Meta:
         ordering = ["created_at"]
-    

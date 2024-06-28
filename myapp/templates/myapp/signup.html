@@ -93,7 +93,6 @@
             color: red;
             list-style: none;
         }
-
     </style>
 
 </head>
@@ -105,13 +104,11 @@
             {% csrf_token %}
             {{ form.as_p }}
 
-  
                 <label for="account_type">Account Type:</label>
                 <select name="account_type">
                     <option value="agent" selected>Agent</option>
                     <option value="company">Company</option>
                 </select>
-
 
             <button type="submit" class="btn">Sign Up</button>
         </form>

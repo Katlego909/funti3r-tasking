@@ -360,11 +360,6 @@ a {
 	justify-content: space-between;
 }
 
-.main-title,  h1 {
-	font-size: 50px;
-	padding-bottom: 20;
-}
-
 .main-title .btn-secondary {
 	background: var(--color-secondary);
 	color: #fff;

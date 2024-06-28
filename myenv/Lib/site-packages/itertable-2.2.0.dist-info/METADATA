@@ -1,0 +1,91 @@
+Metadata-Version: 2.1
+Name: itertable
+Version: 2.2.0
+Summary: Iterable API for tabular datasets including CSV, XLSX, XML, & JSON.
+Author-email: "S. Andrew Sheppard" <andrew@wq.io>
+License: MIT
+Project-URL: Homepage, https://django-data-wizard.wq.io/itertable/
+Project-URL: Documentation, https://django-data-wizard.wq.io/itertable/
+Project-URL: Source, https://github.com/wq/itertable/
+Project-URL: Release Notes, https://github.com/wq/itertable/releases
+Project-URL: Issues, https://github.com/wq/itertable/issues
+Project-URL: CI, https://github.com/wq/itertable/actions/workflows/test.yml
+Classifier: Development Status :: 5 - Production/Stable
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Intended Audience :: Science/Research
+Classifier: Intended Audience :: Developers
+Classifier: Topic :: Text Processing :: Markup :: XML
+Classifier: Topic :: Scientific/Engineering :: GIS
+Classifier: Topic :: Utilities
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: requests
+Requires-Dist: openpyxl
+Requires-Dist: click
+Provides-Extra: gis
+Requires-Dist: Fiona ; extra == 'gis'
+Requires-Dist: geopandas ; extra == 'gis'
+Provides-Extra: oldexel
+Requires-Dist: xlrd ; extra == 'oldexel'
+Requires-Dist: xlwt ; extra == 'oldexel'
+Provides-Extra: pandas
+Requires-Dist: pandas ; extra == 'pandas'
+
+**IterTable** is a Pythonic API for iterating through tabular data formats, including CSV, XLSX, XML, and JSON.
+
+```python
+from itertable import load_file
+
+for row in load_file("example.xlsx"):
+    print(row.date, row.name)
+```
+
+[![Latest PyPI Release](https://img.shields.io/pypi/v/itertable.svg)](https://pypi.org/project/itertable)
+[![Release Notes](https://img.shields.io/github/release/wq/itertable.svg)](https://github.com/wq/itertable/releases)
+[![License](https://img.shields.io/pypi/l/itertable.svg)](https://github.com/wq/itertable/blob/master/LICENSE)
+[![GitHub Stars](https://img.shields.io/github/stars/wq/itertable.svg)](https://github.com/wq/itertable/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/wq/itertable.svg)](https://github.com/wq/itertable/network)
+[![GitHub Issues](https://img.shields.io/github/issues/wq/itertable.svg)](https://github.com/wq/itertable/issues)
+
+[![Tests](https://github.com/wq/itertable/actions/workflows/test.yml/badge.svg)](https://github.com/wq/itertable/actions/workflows/test.yml)
+[![Python Support](https://img.shields.io/pypi/pyversions/itertable.svg)](https://pypi.python.org/pypi/itertable)
+
+### [Documentation][docs]
+
+[**Installation**][installation]
+
+[**API**][api]
+<br>
+[CLI][cli]
+&bull;
+[GIS][gis]
+
+[**Extending IterTable**][custom]
+<br>
+[BaseIter][base]
+&bull;
+[Loaders][loaders]
+&bull;
+[Parsers][parsers]
+&bull;
+[Mappers][mappers]
+
+[docs]: https://django-data-wizard.wq.io/itertable/
+
+[installation]: https://django-data-wizard.wq.io/itertable/#getting-started
+[api]: https://django-data-wizard.wq.io/itertable/#overview
+[cli]: https://django-data-wizard.wq.io/itertable/#command-line-interface
+[custom]: https://django-data-wizard.wq.io/itertable/custom
+[base]: https://django-data-wizard.wq.io/itertable/base
+[loaders]: https://django-data-wizard.wq.io/itertable/loaders
+[parsers]: https://django-data-wizard.wq.io/itertable/parsers
+[mappers]: https://django-data-wizard.wq.io/itertable/mappers
+[gis]: https://django-data-wizard.wq.io/itertable/gis

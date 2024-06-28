@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-2j$u(xg@eje5sx9n23s31u(mtxn2k07+fs+iw*baecl&m)l&gq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # Configure email settings
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -58,6 +58,9 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = 'home'
 
+# settings.py
+DEFENDER_REDIS_URL = 'redis://localhost:8000/0'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -74,12 +77,12 @@ INSTALLED_APPS = [
     'course',
     'login_history',
     'django.contrib.sites',
-
     'cms',
     'menus',
     'treebeard',
-
     'django_check_seo',
+    'data_wizard',
+    'data_wizard.sources',
 ]
 
 SITE_ID = 1
@@ -181,7 +184,7 @@ CKEDITOR_IMAGE_BACKEND = 'pillow'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Django session timeout
-AUTO_LOGOUT = {'IDLE_TIME': 20, 'REDIRECT_TO_LOGIN_IMMEDIATELY': True, 
+AUTO_LOGOUT = {'IDLE_TIME': 600, 'REDIRECT_TO_LOGIN_IMMEDIATELY': True, 
                
                'MESSAGE': 'The session has expired. Please login again to continue.',
 }

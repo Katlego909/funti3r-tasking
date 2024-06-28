@@ -4,7 +4,7 @@ from tasks.models import Task, Category
 
 class UserProfileForm(forms.ModelForm):
 
-    industry = forms.ModelChoiceField(queryset=Category.objects.all(), required=False)
+    industry = forms.ModelChoiceField(queryset=Category.objects.all(), required=True)
 
     class Meta:
         model = Userprofile

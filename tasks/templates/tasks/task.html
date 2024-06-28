@@ -5,6 +5,19 @@
 
 <style>
 
+    .favorite {
+        border: solid #ccc 0.5px;
+        text-align: center;
+        margin-bottom: 10px;
+        padding: 5px ;
+    }
+
+    .favorite:hover {
+        background: purple;
+        color: #fff;
+        transition: ease-in 0.2s;
+    }
+
     .pagination {
         margin-top: 20px;
     }
@@ -92,14 +105,14 @@
                             </div>
                             <p class="card-description"> {{ task.short_description|truncatewords:8 }} </p>      
                             
-                            {% comment %} {% if user.is_authenticated %}
+                            {% if user.is_authenticated %}
                                 <form action="{% url 'toggle_favorite' task.id %}" method="post">
                                     {% csrf_token %}
                                     <input type="submit" class="favorite" value="{% if task in user.favorite_tasks.all %} Remove from Favorites{% else %} Add to Favorites {% endif %}">
                                 </form>
                             {% else %}
                                 <p>Login to add to Favorites.</p>
-                            {% endif %}   {% endcomment %}
+                            {% endif %} 
 
                         </div>
                         <div class="card-footer">
