@@ -65,7 +65,7 @@
             </a>
           </span>
 
-          <span>
+          {% comment %} <span>
               <div class="dropdown">
                 <i class="fa fa-user-circle dropbtn"><small> 
 
@@ -83,7 +83,35 @@
                   <a href="{% url 'logout' %}">Logout <i class="fa fa-sign-out"></i></a>
                 </div>
               </div>
+          </span> {% endcomment %}
+
+          <span>
+              <div class="dropdown">
+                <details>
+                  <summary>
+                    <i class="fa fa-user-circle dropbtn"><small> 
+
+                      {% comment %} {% if user.is_authenticated %}
+                      {{ request.user }}
+                      {% else %}
+                      Guest User
+                      {% endif %} {% endcomment %}
+
+                    </small></i>
+                  </summary>
+                  <ul>
+                    <li> 
+                      <a href="{% url 'profile' %}">Profile</a>
+                    </li>
+                    <li> <a href="{% url 'profile' %}">Settings</a></li>
+                    <li> <a href="{% url 'profile' %}">Help</a></li>
+                    <li> <a href="{% url 'profile' %}">Logout</a></li>
+                  </ul>
+                </details>
+
+              </div>
           </span>
+
 
           {% comment %} <span>
             <a href="{% url 'logout' %}">

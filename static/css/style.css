@@ -86,6 +86,37 @@ a {
   }
   
   /* The container <div> - needed to position the dropdown content */
+
+  .dropdown details {
+	position: relative;
+  }
+
+  .dropdown details ul {
+	position: absolute;
+	top: 150%;
+	right: 10%;
+	list-style: none;
+	width: max-content;
+	background: #fff;
+	border-radius: 5px;
+	box-shadow: 5px 5px 5px #ccc;
+  }
+
+  .dropdown details ul li {
+	font-size: 10;
+	padding: 10px 25px;
+	cursor: pointer;
+  }
+
+  .dropdown details ul li:hover {
+	background-color: #f0f2fb;
+	border-radius: 5px;
+  }
+
+  .dropdown details ul li:last-child {
+	border-top: 0.5px solid #ccc;
+  }
+
   .dropdown {
 	position: relative;
 	display: inline-block;
