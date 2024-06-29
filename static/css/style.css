@@ -94,12 +94,12 @@ a {
   .dropdown details ul {
 	position: absolute;
 	top: 150%;
-	right: 10%;
+	right: 5%;
 	list-style: none;
 	width: max-content;
 	background: #fff;
 	border-radius: 5px;
-	box-shadow: 5px 5px 5px #ccc;
+	border:solid 0.5px #ccc;
   }
 
   .dropdown details ul li {
@@ -294,7 +294,7 @@ a {
 .upgrade a {
 	display: flex;
 	align-items: center;
-	gap: 10px;
+	gap: 15px;
 	margin:0 20px 20px 20px;
 	width: 200px;
 	background: var(--color-secondary);

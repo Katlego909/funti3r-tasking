@@ -100,12 +100,35 @@
                     </small></i>
                   </summary>
                   <ul>
+                    <li style="font-weight:bold;border-bottom:"> 
+                      {% if user.is_authenticated %}
+                        {{ request.user }}
+                      {% else %}
+                        Guest User
+                      {% endif %}
+
+                      {% if userprofile.is_company %}
+                              <p style="font-size:12px;font-weight:normal">Company Account</p>
+                      {% else %}
+                          <p style="font-size:12px;font-weight:normal">Agent Account</p>
+                          <p style="font-size:10px;font-weight:normal; padding-top:5px;border-radius:10px">{{ userprofile.industry }}</p>
+                          
+                      {% endif %}
+                    </li>
                     <li> 
                       <a href="{% url 'profile' %}">Profile</a>
                     </li>
-                    <li> <a href="{% url 'profile' %}">Settings</a></li>
+                    <li> 
+                      <details>
+                        <summary>Settings</summary>
+                        <ul>
+                          <li>Change password</li>
+                          <li>Delete account</li>
+                        </ul>
+                      </details>
+                    </li>
                     <li> <a href="{% url 'profile' %}">Help</a></li>
-                    <li> <a href="{% url 'profile' %}">Logout</a></li>
+                    <li> <a href="{% url 'logout' %}">Logout</a></li>
                   </ul>
                 </details>
 

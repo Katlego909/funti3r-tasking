@@ -3,16 +3,18 @@ from .models import Category, Course, Lesson, LessonResource, Enrollment, Progre
 
 import data_wizard
 
-admin.site.register(Category)
-admin.site.register(Course)
+from import_export.admin import ImportExportModelAdmin
+
+admin.site.register(Category, ImportExportModelAdmin)
+admin.site.register(Course, ImportExportModelAdmin)
 
 data_wizard.register(Course)
 
-admin.site.register(Lesson)
-admin.site.register(LessonResource)
-admin.site.register(Enrollment)
-admin.site.register(Progress)
-admin.site.register(Chapter)
-admin.site.register(Resource)
+admin.site.register(Lesson, ImportExportModelAdmin)
+admin.site.register(LessonResource, ImportExportModelAdmin)
+admin.site.register(Enrollment, ImportExportModelAdmin)
+admin.site.register(Progress, ImportExportModelAdmin)
+admin.site.register(Chapter, ImportExportModelAdmin)
+admin.site.register(Resource, ImportExportModelAdmin)
 
 

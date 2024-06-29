@@ -83,6 +83,8 @@ INSTALLED_APPS = [
     'django_check_seo',
     'data_wizard',
     'data_wizard.sources',
+    
+    'import_export',
 ]
 
 SITE_ID = 1
