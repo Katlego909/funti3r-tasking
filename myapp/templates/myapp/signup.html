@@ -93,6 +93,12 @@
             color: red;
             list-style: none;
         }
+
+        .account-type {
+            display: flex;
+            gap: 5px;
+        }
+
     </style>
 
 </head>
@@ -104,11 +110,12 @@
             {% csrf_token %}
             {{ form.as_p }}
 
-                <label for="account_type">Account Type:</label>
-                <select name="account_type">
+                 <label for="account_type">Account Type:</label>
+                <select name="account_type" class="account-type">
                     <option value="agent" selected>Agent</option>
                     <option value="company">Company</option>
-                </select>
+                </select> 
+
 
             <button type="submit" class="btn">Sign Up</button>
         </form>

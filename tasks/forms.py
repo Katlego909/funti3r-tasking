@@ -22,6 +22,13 @@ class ApplicationForm(forms.ModelForm):
     class Meta:
         model = Application
         fields = ['cover_letter', 'experience', 'email', 'linkedin_profile','resume']
+        widgets = {
+            'cover_letter': forms.Textarea(attrs={'placeholder': 'Cover Letter'}),
+            'experience': forms.Textarea(attrs={'placeholder': 'Please provide Experience'}),
+            'email': forms.EmailInput(attrs={'placeholder': 'Enter Email'}),
+            'linkedin_profile': forms.TextInput(attrs={'placeholder': 'LinkedIn Profile'}),
+            'resume': forms.FileInput(attrs={'placeholder': 'Upload Resume/CV'}),
+        }
 
 class TaskSearchForm(forms.Form):
     search_short_description = forms.CharField(label='Search for task', required=False)

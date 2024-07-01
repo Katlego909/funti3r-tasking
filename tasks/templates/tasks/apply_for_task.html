@@ -47,6 +47,15 @@
         border-radius: 5px;
     }
 
+    input[type="file"] {
+        width: 100%;
+        padding: 25px;
+        box-sizing: border-box;
+        border: solid 1px #ccc;
+        margin-bottom: 5px;
+        background: #fff;
+    }
+
     label {
         display: block;
         margin-bottom: 10px;
@@ -182,7 +191,33 @@
 
     <form method="POST" action="." enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p}}
+        {% comment %} {{ form.as_p}} {% endcomment %}
+
+        <div class="form-group">
+            <label>Cover Letter</label>
+            {{ form.cover_letter }}
+          </div>
+
+          <div class="form-group">
+            <label>Experience</label>
+            {{ form.experience }}
+          </div>
+
+          <div class="form-group">
+            <label>Email</label>
+            {{ form.email }}
+          </div>
+
+          <div class="form-group">
+            <label>LinkedIn Profile</label>
+            {{ form.linkedin_profile }}
+          </div>
+
+          <div class="form-group">
+            <label>Resume or CV</label>
+            {{ form.resume }}
+          </div>
+
         <button type="submit" class="btn-submit">Apply</button>
     </form>
  </div>

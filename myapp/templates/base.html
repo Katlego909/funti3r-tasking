@@ -89,7 +89,7 @@
               <div class="dropdown">
                 <details>
                   <summary>
-                    <i class="fa fa-user-circle dropbtn"><small> 
+                    <i class="fa fa-user-circle dropbtn"> 
 
                       {% comment %} {% if user.is_authenticated %}
                       {{ request.user }}
@@ -97,10 +97,12 @@
                       Guest User
                       {% endif %} {% endcomment %}
 
-                    </small></i>
+                    </i>
+
                   </summary>
                   <ul>
                     <li style="font-weight:bold;border-bottom:"> 
+            
                       {% if user.is_authenticated %}
                         {{ request.user }}
                       {% else %}
@@ -114,16 +116,19 @@
                           <p style="font-size:10px;font-weight:normal; padding-top:5px;border-radius:10px">{{ userprofile.industry }}</p>
                           
                       {% endif %}
+
                     </li>
-                    <li> 
+                    <li style="border-top:solid 0.5px #ccc"> 
                       <a href="{% url 'profile' %}">Profile</a>
+
+                      
                     </li>
                     <li> 
                       <details>
                         <summary>Settings</summary>
                         <ul>
+                          <li><a href="{% url 'edit_profile' %}">Edit Profile</a></li>
                           <li>Change password</li>
-                          <li>Delete account</li>
                         </ul>
                       </details>
                     </li>

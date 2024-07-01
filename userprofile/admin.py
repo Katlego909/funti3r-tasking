@@ -1,5 +1,6 @@
 from django.contrib import admin
 from .models import Userprofile, ConversationMessage
+from import_export.admin import ImportExportModelAdmin
 
-admin.site.register(Userprofile)
-admin.site.register(ConversationMessage)
+admin.site.register(Userprofile, ImportExportModelAdmin)
+admin.site.register(ConversationMessage, ImportExportModelAdmin)

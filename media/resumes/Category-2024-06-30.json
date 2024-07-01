@@ -1,0 +1,82 @@
+[
+    {
+        "id": "16",
+        "name": "Data Entry & Verification",
+        "description": "Input and validate information accurately for streamlined processes."
+    },
+    {
+        "id": "15",
+        "name": "Research & Data Compilation",
+        "description": "Gather information from various sources for comprehensive data sets."
+    },
+    {
+        "id": "14",
+        "name": "Community Building & Engagement",
+        "description": "Foster a thriving community for collaborative micro-tasking success."
+    },
+    {
+        "id": "13",
+        "name": "Customer Support",
+        "description": "Address customer inquiries promptly and provide satisfactory solutions."
+    },
+    {
+        "id": "12",
+        "name": "Data Labeling & Categorization",
+        "description": "Label data for machine learning models with precision."
+    },
+    {
+        "id": "11",
+        "name": "Virtual Assistant Tasks",
+        "description": "Assist with administrative tasks and provide personalized support."
+    },
+    {
+        "id": "10",
+        "name": "Content Moderation & Filtering",
+        "description": "Maintain online communities with effective content moderation."
+    },
+    {
+        "id": "9",
+        "name": "Market Research Surveys:",
+        "description": "Gather insights through targeted surveys for informed decisions."
+    },
+    {
+        "id": "8",
+        "name": "Transcription & Translation",
+        "description": "Convert audio/video to text or translate languages accurately."
+    },
+    {
+        "id": "7",
+        "name": "Social Media Management",
+        "description": "Engage audiences and curate content for online platforms."
+    },
+    {
+        "id": "6",
+        "name": "Image Annotation & Tagging",
+        "description": "Enhance image recognition systems with precise annotations."
+    },
+    {
+        "id": "5",
+        "name": "Proofreading & Editing",
+        "description": "Ensure accuracy and clarity in written content effortlessly."
+    },
+    {
+        "id": "4",
+        "name": "User Experience & Interface Design",
+        "description": "Craft intuitive interfaces for seamless micro-task engagement."
+    },
+    {
+        "id": "3",
+        "name": "Data Analysis",
+        "description": "we will explore the fundamentals of data analysis, covering key concepts, techniques, and tools used to analyze and interpret data."
+    },
+    {
+        "id": "2",
+        "name": "AI Services",
+        "description": ""
+    },
+    {
+        "id": "1",
+        "name": "Data Entry & Organization",
+        "description": "Input and organize data efficiently for seamless management."
+    }
+]

@@ -10,8 +10,8 @@
     <h1>Dashboard</h1>
 </div>
 
-<div class="welcome-title" style=" ">
-    <p class="greeting">Welcome, {{ request.user }}</p>
+<div class="welcome-title" style="padding-top:10px">
+    <p class="greeting" style="font-size:18px">Welcome, <span style="font-weight:bold">{{ request.user.username }} </span></p>
 </div>
 
 <div class="main-cards">
