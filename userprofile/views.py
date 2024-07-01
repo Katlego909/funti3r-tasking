@@ -38,7 +38,7 @@ def edit_profile(request):
             if request.user.username != new_username:
                 # Update the username using Django's authentication system
                 request.user.username = new_username
-                request.user.save()
+                # request.user.save()
             return redirect('profile')  # Redirect to the user's profile page
     else:
         # Get the selected industry if it exists
