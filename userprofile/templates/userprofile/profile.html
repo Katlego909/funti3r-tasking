@@ -123,8 +123,8 @@
         text-align: center;
         color: green;
         padding: 5px;
-        border-radius: 2px;
-        margin-top: 5px;
+        border-radius: 10px;
+        margin-bottom: 25px;
       }
 
       .user-email {
@@ -177,10 +177,20 @@
     }
 
     .account_free {
-        color: blue;
+        font-size: 12px;
+        border: solid 0.5px #ccc;
+        border-radius: 20px;
+        padding: 10px 20px;
+        margin-bottom: 20px;
+    }
 
     .account_upgrade {
-        color: blue;
+        font-size: 12px;
+        border: solid 0.5px #ccc;
+        border-radius: 20px;
+        padding: 10px 20px;
+        margin-bottom: 20px;
+    }
 
     @media screen and (max-width: 768px) {
 
@@ -203,7 +213,7 @@
             width: 100%;
         }
 
-      
+
 
     }
 
@@ -252,11 +262,10 @@
             <p class="user-email">{{ userprofile.email }}</p>  
             <p class="user-industry">{{ userprofile.industry }}</p>  
 
-
         {% if user.userprofile.account_type == 'free' %}
-        <a href="{% url 'upgrade_account' %}" ><button class="account_free">Upgrade</button></a>
+        <a href="{% url 'upgrade_account' %}" class="account_free">Upgrade</a>
         {% elif user.userprofile.account_type == 'paid' %}
-        <a href="{% url 'downgrade_account' %}" ><button class="account_upgrade">Switch to Free account</button></a>
+        <a href="{% url 'downgrade_account' %}" class="account_upgrade">Switch to Free account</a>
         {% endif %}
 
 
