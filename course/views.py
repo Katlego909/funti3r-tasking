@@ -20,7 +20,7 @@ def course_list(request):
             course.is_unlocked = request.user in course.subscribers.all()
         else:
             for course in courses:
-                course.is_unlocked = Fasle
+                course.is_unlocked = False
 
     for category in categories:
         courses = Course.objects.filter(category=category)
