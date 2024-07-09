@@ -11,6 +11,7 @@ urlpatterns = [
     path('', include("course.urls")),
     path('', include("userprofile.urls")),
     path('', include("notifications.urls")),
+    # path('accounts/', include('allauth.urls')),
     path('django-check-seo/', include("django_check_seo.urls")),
     path('datawizard/', include("data_wizard.urls")),
     path('logout/', views.LogoutView.as_view(), name="logout"),

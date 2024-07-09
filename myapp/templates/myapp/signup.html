@@ -104,17 +104,19 @@
 </head>
 <body>
     <div class="container">
-        {% comment %} <img src="{% static 'assets/images/logo.svg'  %}" class="logo" alt="logo"> {% endcomment %}
+        <a href="{% url 'home' %}">
+            <img src="{% static 'assets/images/logo.svg'  %}" class="logo" alt="logo">
+        </a>
         <h2>Sign Up</h2>
         <form method="POST" action=".">
             {% csrf_token %}
             {{ form.as_p }}
 
-                 <label for="account_type">Account Type:</label>
+                 {% comment %} <label for="account_type">Account Type:</label>
                 <select name="account_type" class="account-type">
                     <option value="agent" selected>Agent</option>
                     <option value="company">Company</option>
-                </select> 
+                </select>  {% endcomment %}
 
 
             <button type="submit" class="btn">Sign Up</button>

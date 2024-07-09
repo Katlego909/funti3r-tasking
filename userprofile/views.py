@@ -3,14 +3,36 @@ from django.shortcuts import render, get_object_or_404, redirect
 from notifications.utilities import create_notification
 from tasks.models import Application, Task
 from .models import ConversationMessage
-from .forms import UserProfileForm
+from .forms import UserProfileForm, UpgradeAccountForm
 from django.contrib import messages
 from tasks.forms import ApplicationForm
 from django.core.exceptions import PermissionDenied
+from .decorators import paid_account_required
 
 @login_required
 def profile(request): 
     return render(request, "userprofile/profile.html", {'userprofile': request.user.userprofile})
+
+@login_required
+def upgrade_account(request):
+    if request.method == 'POST':
+        form = UpgradeAccountForm(request.POST)
+        if form.is_valid():
+            user_profile = request.user.userprofile
+            user_profile.account_type = 'paid'
+            user_profile.save()
+            return redirect('profile')
+    else:
+        form = UpgradeAccountForm()
+
+    return render(request, 'userprofile/upgrade_account.html', {'form': form})
+
+@login_required
+def downgrade_account(request):
+    user_profile = request.user.userprofile
+    user_profile.account_type = 'free'
+    user_profile.save()
+    return redirect('profile')
 
 def user_profile_view(request):
     user = request.user
@@ -48,6 +70,7 @@ def edit_profile(request):
     return render(request, 'userprofile/edit_profile.html', {'form': form})
 
 @login_required
+@paid_account_required
 def recommend_tasks(request):
     user_profile = request.user.userprofile
 
@@ -127,6 +150,7 @@ def edit_application(request, application_id):
         form = ApplicationForm(instance=application)
 
     return render(request, "userprofile/edit_application.html", {"form": form, "application": application})
+
 
 @login_required
 def view_task(request, task_id):

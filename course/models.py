@@ -37,6 +37,7 @@ class Course(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     experience_level = models.CharField(max_length=20, choices=EXPERIENCE_CHOICES, default='Beginner')
     duration = models.CharField(max_length=20, choices=DURATION_CHOICES, default='1 Week')
+    subscribers = models.ManyToManyField(User, related_name="courses_subscribed", blank=True)
 
     def __str__(self):
         return f"{self.title} - {self.experience_level} | {self.category}"

@@ -89,7 +89,9 @@
 </head>
 <body>
     <div class="container">
-        <img src="{% static 'assets/images/logo.svg'  %}" class="logo" alt="logo">
+        <a href="{% url 'home' %}">
+            <img src="{% static 'assets/images/logo.svg'  %}" class="logo" alt="logo">
+        </a>
         <h2>Log in</h2>
 
         {% for message in messages %}

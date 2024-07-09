@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upgrade Account</title>
+
+    <style>
+        /* Centering the card */
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0; /* Optional: Background color for the page */
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .card {
+            text-align: center;
+            background: #ffffff; /* Optional: Card background color */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .upgrade-card form input[type="radio"] {
+            appearance: none;
+            border-radius: 50%%;
+            width: 20px;
+            color: blue;
+        }
+
+        .btn-upgrade {
+            font-weight: bold;
+            margin-top: 15px;
+            border: none;
+            padding: 15px 25px;
+            background: orangered;
+            color: #fff;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .btn-upgrade:hover {
+            background: orange;
+        }
+
+        .btn-back {
+            font-size: 14px;
+            margin-top: 20px;
+
+        
+        }
+
+        .btn-back a {
+            text-decoration: none;
+        }
+
+    
+
+    </style>
+
+</head>
+<body>
+
+<div class="card">
+
+    <div class="upgrade-card">
+
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" width=120 class="w-4">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+    </svg>
+
+        <h1>Upgrade to Paid Account</h1>
+        <form action="{% url 'upgrade_account' %}" method="POST">
+            {% csrf_token %}
+            <div class="radio-group">
+
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn-upgrade">Upgrade Account</button>
+        </form>
+
+        <div class="btn-back">
+            <a href="{% url 'profile' %}">Back to Profile</a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

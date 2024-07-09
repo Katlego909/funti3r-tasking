@@ -1,3 +1,4 @@
+# models.py
 from django.db import models
 from django.contrib.auth.models import User
 from django.templatetags.static import static
@@ -13,25 +14,18 @@ class Userprofile(models.Model):
     bio = models.TextField(blank=True, null=True)
     industry = models.CharField(max_length=255, blank=True, null=True)
     earnings = models.DecimalField(default=0, max_digits=10, decimal_places=2)
+    account_type = models.CharField(max_length=10, choices=[('free', 'Free'), ('paid', 'Paid')], default='free')
 
     def __str__(self):
         return f'{self.user} - {self.email}'
     
     @property
     def name(self):
-        if self.username:
-            name = self.username
-        else:
-            name = self.user.username
-        return name
+        return self.username or self.user.username
     
     @property
     def avatar(self):
-        try:
-            avatar = self.image.url
-        except:
-            avatar = static('images/avatar.svg')
-        return avatar
+        return self.profile_picture.url if self.profile_picture else static('images/avatar.svg')
 
     @property
     def application_count(self):
@@ -42,7 +36,6 @@ User.userprofile = property(lambda u: Userprofile.objects.get_or_create(user=u)[
 class ConversationMessage(models.Model):
     application = models.ForeignKey(Application, related_name="conversationmessages", on_delete=models.CASCADE)
     content = models.TextField()
-
     created_by = models.ForeignKey(User, related_name="conversationmessages", on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 

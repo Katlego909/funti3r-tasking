@@ -10,10 +10,13 @@ data-wizard==2.0.0
 diff-match-patch==20230430
 dj-user-login-history==1.0.5
 Django==4.2.7
+django-allauth==0.63.3
 django-auto-logout==0.5.1
+django-cache-cleaner==0.1.0
 django-check-seo==1.0.1
 django-ckeditor==6.0.0
 django-classy-tags==4.1.0
+django-cleanup==8.1.0
 django-cms==3.11.6
 django-defender==0.9.8
 django-filer==3.1.3

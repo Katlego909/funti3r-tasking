@@ -77,14 +77,23 @@
         text-decoration: none;
     }
 
+    .not-selected {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 5px;
+    }
+
+    .not-selected p {
+        color: grey;
+    }
+
 </style>
 
 <div class="main-container">
     <h1 class="recommend-heading">Recommended Tasks for {{ user_profile.username }}</h1>
     <a href="{% url 'profile' %}" class="btn-back"><i class="fa fa-chevron-left"></i> Back to Profile</a>
 
-    
-    
     {% if recommended_tasks %}
         <ul>
             <div class="recommends-grid">
@@ -115,7 +124,10 @@
             </div>
         </ul>
     {% else %}
-        <p class="not-selected">No tasks found for the selected industry.</p>
+        <div class="not-selected">
+            <img width="36" src="{% static 'assets/icons/recommend.svg' %}" alt="" />
+            <p>No tasks found for the selected industry.</p>
+        </div>
     {% endif %}
 
     {% comment %} {% if recommended_tasks %}

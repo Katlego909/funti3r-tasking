@@ -10,6 +10,8 @@ urlpatterns = [
     path('view_application/<int:application_id>/', views.view_application, name='view_application'),
     path('edit_application/<int:application_id>/', views.edit_application, name='edit_application'),
     path('approve/<int:application_id>/', views.approve_application, name='approve_application'),
+    path('upgrade/', views.upgrade_account, name='upgrade_account'),
+    path('downgrade/', views.downgrade_account, name='downgrade_account'),
 ]
 
 

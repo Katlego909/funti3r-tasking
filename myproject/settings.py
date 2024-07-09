@@ -85,6 +85,14 @@ INSTALLED_APPS = [
     'data_wizard.sources',
     
     'import_export',
+    
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    
+    'django_cleanup.apps.CleanupConfig',
+    
+    'cache_cleaner',
 ]
 
 SITE_ID = 1
@@ -98,6 +106,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django_auto_logout.middleware.auto_logout',
+    
+    # "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'myproject.urls'
@@ -184,8 +194,24 @@ CKEDITOR_IMAGE_BACKEND = 'pillow'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# AUTHENTICATION_BACKENDS = [
+#     'django.contrib.auth.backends.ModelBackend',
+#     'allauth.account.auth_backends.AuthenticationBackend',
+# ]
+
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_USERNAME_REQUIRED = True
+# ACCOUNT_AUTHENTICATION_METHOD = 'email'
+# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
 # Django session timeout
 AUTO_LOGOUT = {'IDLE_TIME': 600, 'REDIRECT_TO_LOGIN_IMMEDIATELY': True, 
                
                'MESSAGE': 'The session has expired. Please login again to continue.',
 }
+
+YOCO_API_KEY = 'your-api-key'
+YOCO_SECRET_KEY = 'sk_live_74a3e60bDEP4nBDd09d45cf9689c'
+

@@ -2,22 +2,34 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Course, Lesson, Enrollment, LessonResource, Category, Progress, Chapter
 from django.db.models import Count
+from userprofile.decorators import paid_account_required
 
+@login_required
+@paid_account_required
 def home(request):
     return render(request, 'course/home.html')
 
 @login_required
 def course_list(request):
+    courses = Course.objects.all()
     categories = Category.objects.all()
     courses_by_category = {}
+    
+    if request.user.is_authenticated:
+        for course in courses:
+            course.is_unlocked = request.user in course.subscribers.all()
+        else:
+            for course in courses:
+                course.is_unlocked = Fasle
 
     for category in categories:
         courses = Course.objects.filter(category=category)
         courses_by_category[category] = courses
 
-    return render(request, 'course/course_list.html', {'courses_by_category': courses_by_category})
+    return render(request, 'course/course_list.html', {'courses_by_category': courses_by_category, "courses": courses})
 
 @login_required
+@paid_account_required
 def course_detail(request, course_id):
     course = get_object_or_404(Course, pk=course_id)
     enrolled = Enrollment.objects.filter(student=request.user, course=course).exists()

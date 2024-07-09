@@ -4,11 +4,27 @@ from django.contrib.auth.models import User
 from .models import Ticket
 
 class CustomUserCreationForm(UserCreationForm):
-    email = forms.EmailField(required=True, label='Email')
+    email = forms.EmailField(label='Email')
+    username = forms.CharField(max_length=150)
+    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
 
     class Meta:
         model = User
         fields = ['username', 'email', 'password1', 'password2']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        widgets = {
+            'email': forms.EmailInput(attrs={'placeholder': 'Enter Email'}),
+            'username': forms.TextInput(attrs={'placeholder': 'Choose Username'}),
+            'password1': forms.PasswordInput(attrs={'placeholder': 'Enter Password'}),
+            'password2': forms.PasswordInput(attrs={'placeholder': 'Confirm Password'}),
+        }
+
+        for field_name, widget in widgets.items():
+            self.fields[field_name].widget = widget
 
 class TicketForm(forms.ModelForm):
     class Meta:

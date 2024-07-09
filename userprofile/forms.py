@@ -18,3 +18,6 @@ class UserProfileForm(forms.ModelForm):
             'bio': forms.Textarea(attrs={'placeholder': 'Bio'}),
             'industry': forms.TextInput(attrs={'placeholder': 'Industry'}),
         }
+        
+class UpgradeAccountForm(forms.Form):
+    confirm = forms.BooleanField(label="Confirm Upgrade")

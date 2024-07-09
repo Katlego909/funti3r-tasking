@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Profile{% endblock title %}
 {% block content %}
 
@@ -168,6 +169,19 @@
         justify-content: space-between;
     }
 
+    .empty-notice {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 5px;
+    }
+
+    .account_free {
+        color: blue;
+
+    .account_upgrade {
+        color: blue;
+
     @media screen and (max-width: 768px) {
 
         .profile {
@@ -188,6 +202,8 @@
         .profile-buttons {
             width: 100%;
         }
+
+      
 
     }
 
@@ -235,6 +251,15 @@
             <h3 class="username"><strong>{{ request.user.username }}</strong></h3>
             <p class="user-email">{{ userprofile.email }}</p>  
             <p class="user-industry">{{ userprofile.industry }}</p>  
+
+
+        {% if user.userprofile.account_type == 'free' %}
+        <a href="{% url 'upgrade_account' %}" ><button class="account_free">Upgrade</button></a>
+        {% elif user.userprofile.account_type == 'paid' %}
+        <a href="{% url 'downgrade_account' %}" ><button class="account_upgrade">Switch to Free account</button></a>
+        {% endif %}
+
+
         </div>
     </div>
 
@@ -296,12 +321,12 @@
     </div>
     {% empty %}
         <div class="empty-notice" style="color:grey">
+            <img width="36" src="{% static 'assets/icons/application.svg' %}" alt="" />
             <p>You have not applied for any tasks yet!</p>
         </div>
     {% endfor %}
     {% endif %}
     </div>
-</div>
 
 </div>
 
