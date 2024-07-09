@@ -86,6 +86,8 @@ INSTALLED_APPS = [
     
     'import_export',
     
+    'ninja',
+    
     # 'allauth',
     # 'allauth.account',
     # 'allauth.socialaccount',

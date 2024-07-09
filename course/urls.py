@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from .api import api
 
 urlpatterns = [
     path('course_list/', views.course_list, name='course_list'),
@@ -11,4 +12,5 @@ urlpatterns = [
     path('course/<int:course_id>/lesson/<int:lesson_id>/resource/<int:resource_id>/', views.lesson_resource, name='lesson_resource'),
     path('course/<int:course_id>/unenroll/', views.unenroll_course, name='unenroll_course'),
     path('lesson/<int:lesson_id>/mark_complete/', views.mark_as_complete, name='mark_as_complete'),
+    path("api/", api.urls),
 ]
