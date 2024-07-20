@@ -1,0 +1,33 @@
+<!-- userprofile/templates/userprofile/list_withdrawals.html -->
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Withdrawal Requests</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Amount</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for withdrawal in withdrawals %}
+        <tr>
+          <td>{{ withdrawal.userprofile.name }}</td>
+          <td>{{ withdrawal.amount }}</td>
+          <td>{{ withdrawal.status }}</td>
+          <td>
+            {% if withdrawal.status == 'pending' %}
+              <form method="POST" action="{% url 'approve_withdrawal' withdrawal.id %}">
+                {% csrf_token %}
+                <button type="submit">Approve</button>
+              </form>
+            {% endif %}
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

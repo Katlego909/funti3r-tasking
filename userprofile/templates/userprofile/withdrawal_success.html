@@ -1,0 +1,38 @@
+<!-- templates/userprofile/withdrawals.html -->
+{% extends 'base.html' %}
+
+{% block title %}Withdrawal Requests{% endblock %}
+
+{% block content %}
+<h2>Withdrawal Requests</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for withdrawal in withdrawals %}
+        <tr>
+            <td>{{ withdrawal.userprofile }}</td>
+            <td>{{ withdrawal.amount }}</td>
+            <td>{{ withdrawal.status }}</td>
+            <td>
+                {% if withdrawal.status == 'pending' %}
+                <a href="{% url 'approve_withdrawal' withdrawal.id %}">Approve</a>
+                <a href="{% url 'reject_withdrawal' withdrawal.id %}">Reject</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">No withdrawal requests found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

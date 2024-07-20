@@ -44,13 +44,15 @@ class Task(models.Model):
     ACCEPTED = "accepted"
     ARCHIVED = "archived"
     FAVORITE = "favorite"
+    COMPLETED = "completed"
 
     CHOICES_STATUS = (
-        (ACTIVE, "Active"),
-        (ACCEPTED, "Accepted"),
-        (ARCHIVED, "Archived"),
-        (FAVORITE, "Favorite"),
-    )
+    (ACTIVE, "Active"),
+    (ACCEPTED, "Accepted"),
+    (ARCHIVED, "Archived"),
+    (FAVORITE, "Favorite"),
+    (COMPLETED, "Completed"),  # Add this line
+)
 
     ENTRY_LEVEL = "entry"
     MID_LEVEL = "mid"

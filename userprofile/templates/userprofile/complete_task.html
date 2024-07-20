@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Complete Task</title>
+</head>
+<body>
+    <h1>Complete Task: {{ task.title }}</h1>
+    
+    <p>{{ task.description }}</p>
+    
+    <h3>Are you sure you want to mark this task as complete?</h3>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Complete Task</button>
+    </form>
+
+    <a href="{% url 'tasks' %}">Cancel</a>
+</body>
+</html>

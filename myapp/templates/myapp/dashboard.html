@@ -48,8 +48,15 @@
         <div class="card-inner">
             <h3>My Earnings</h3>
             <img src="{% static '/assets/icons/wallet.svg'%}" alt="">
+            
+        <form method="post" action="{% url 'request_withdrawal' %}">
+            {% csrf_token %}
+            <input type="number" name="amount" placeholder="Withdrawal Amount" required>
+            <button type="submit">Request Withdrawal</button>
+        </form>
+
         </div>
-        <h1>R{{ user_profile.earnings }}</h1>
+        <h1>R{{ user.userprofile.earnings }}</h1>
         <hr>
         <br>
         <div class="transaction">
